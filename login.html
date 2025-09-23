@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Beauty Center</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #5B4D67, #53455F,#7e6a90,#CDBDE0);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-card {
+      background: #F1EBDF;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      padding: 2rem;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .login-card img {
+      width: 70px;
+      margin-bottom: 15px;
+    }
+
+    .login-card h3 {
+      color: #5B4D67;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+    }
+
+    .form-control {
+      border-radius: 12px;
+      padding: 10px 15px;
+      border: 1px solid #CDBDE0;
+    }
+
+    .form-control:focus {
+      border-color: #5B4D67;
+      box-shadow: 0 0 0 0.2rem rgba(91, 77, 103, 0.25);
+    }
+
+    .btn-login {
+      background: linear-gradient(135deg, #5B4D67, #7e6a90);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: bold;
+      padding: 10px;
+      transition: transform 0.2s;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #7e6a90, #5B4D67);
+    }
+
+    .small-text {
+      margin-top: 1rem;
+      color: #53455F;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-card">
+    <img src="images/20250915_112237.png" class="img-fluid" alt="Logo">
+    <h3>Login</h3>
+    <form id="login-form">
+      <div class="mb-3 text-start">
+        <label for="username" class="form-label">User Name</label>
+        <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+      </div>
+      <div class="mb-3 text-start">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+      </div>
+      <button type="submit" class="btn btn-login w-100">Login</button>
+    </form>
+    <!-- <div class="small-text">
+      Forgot your password? <a href="#" style="color:#5B4D67;font-weight:bold;">Reset here</a>
+    </div> -->
+  </div>
+
+  <script>
+    const form = document.getElementById('login-form');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      if (user === "admin" && pass === "1234") {
+        window.location.href = "index.html"; // ✅ Redirect to Dashboard
+      } else {
+        alert("Invalid username or password!");
+      }
+    });
+  </script>
+</body>
+
+</html>

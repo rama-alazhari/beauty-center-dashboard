@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees - Beauty Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .table-actions button {
+            margin-right: 5px;
+        }
+
+        .status-circle {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .status-circle.active {
+            background-color: green;
+        }
+
+        .status-circle.inactive {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <aside class="sidebar d-flex flex-column p-3">
+             <div class="d-flex justify-content-start"> <img src="images/20250915_112237.png" width="70" height="70" alt="Logo"
+          class="img-fluid mb-2">
+        <h2 class="text-white mt-4 fs-4 ms-3">Beauty Center</h2>
+      </div>
+            <nav class="nav flex-column">
+                <!-- Dashboard -->
+                <a class="nav-link text-white" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
+
+                <!-- Settings Dropdown -->
+                <a class="nav-link text-white d-flex justify-content-between align-items-center active"
+                    data-bs-toggle="collapse" href="#settingsMenu" role="button" aria-expanded="false">
+                    <span><span class="fs-3">⚙️</span> Settings</span>
+                    <span class="fs-6">▼</span>
+                </a>
+                <div class="collapse" id="settingsMenu">
+                    <!-- Users -->
+                    <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse" href="#usersMenu" role="button" aria-expanded="false">
+                        <span>- <span class="fs-3">👨🏻‍💻</span> Users</span><span style="font-size: 11px;">▼</span>
+                    </a>
+                    <div class="collapse ps-3" id="usersMenu">
+                        <a class="nav-link text-white" href="admin.html">-- 👨🏻‍💻 Admin</a>
+                        <a class="nav-link text-white" href="users.html">-- 👨🏻 User</a>
+                    </div>
+
+                    <!-- Expenses Type -->
+                    <a class="nav-link text-white" href="expenses-type.html">- <span class="fs-3">💰</span> Expenses
+                        Type</a>
+
+                          <!-- Supplier -->
+          <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
+
+                    <!-- Employees -->
+                    <a class="nav-link text-white d-flex justify-content-between align-items-center active"
+                        data-bs-toggle="collapse" href="#employeesMenu" role="button" aria-expanded="false">
+                        <span>- <span class="fs-3">👩‍💻</span> Employees</span><span style="font-size: 11px;">▼</span>
+                    </a>
+                    <div class="collapse ps-3" id="employeesMenu">
+                        <a class="nav-link text-white active" href="employees.html">-- 👩 Employee</a>
+                        <a class="nav-link text-white" href="desgination.html">-- 🖥️ Desgination</a>
+                    </div>
+
+                    <!-- services -->
+                    <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
+                </div>
+
+                <!-- Customers -->
+                <a class="nav-link text-white" href="customers.html"><span class="fs-3">🧑‍💼</span> Customers</a>
+
+                <!-- Billing Dropdown -->
+                <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                    data-bs-toggle="collapse" href="#billingMenu" role="button" aria-expanded="false">
+                    <span><span class="fs-3">💳</span> Billing</span>
+                    <span class="fs-6">▼</span>
+                </a>
+                <div class="collapse" id="billingMenu">
+                    <a class="nav-link text-white" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses
+                        List</a>
+                    <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
+                </div>
+
+                <!-- Calendar -->
+                <a class="nav-link text-white" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
+            </nav>
+            <p class="text-light pt-4 mt-auto">
+                <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
+            </p>
+        </aside>
+
+
+        <!-- Main content -->
+        <main class="flex-grow-1 p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 style="color: #5B4D67;">Employees</h3>
+                <button class="btn text-light fw-bold" style="background-color: #AE8FD4;" id="add-new">+ Add
+                    Employee</button>
+            </div>
+
+            <!-- Add Employee Modal -->
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #5B4D67; color:white;">
+                            <h5 class="modal-title">Add Employee</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="add-form">
+                                <div class="mb-3">
+                                    <label class="form-label">Employee Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter employee name"
+                                        id="add-name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Specialization</label>
+                                    <input type="text" class="form-control" placeholder="Type to search or add..."
+                                        id="specialization-search">
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <select id="form-specialization" class="form-select flex-grow-1"
+                                            size="3"></select>
+                                        <button class="btn btn-outline-secondary ms-2" type="button"
+                                            id="add-specialization-btn" style="display:none;">+ Add</button>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="add-start-date" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <select id="form-status" class="form-select" required>
+                                        <option>Active</option>
+                                        <option>Inactive</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn text-light w-100 fw-bold"
+                                    style="background: linear-gradient(#5B4D67,#7e6a90);">Save Employee</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Specialization Modal -->
+            <div class="modal fade" id="addSpecializationModal" tabindex="-1">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #5B4D67; color:white;">
+                            <h5 class="modal-title">Add Specialization</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="add-specialization-form">
+                                <input type="text" class="form-control mb-2" id="new-specialization-name"
+                                    placeholder="Enter specialization" required>
+                                <button type="submit" class="btn text-light w-100"
+                                    style="background: linear-gradient(#5B4D67,#7e6a90);">Add</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employees Table -->
+            <div class="card card-custom p-3 mb-4">
+                <h5 class="mb-3" style="color: #5B4D67;">Employees List</h5>
+                <div class="d-flex justify-content-between mb-3">
+                    <div class="d-flex justify-content-start mb-3">
+                        <input type="text" id="employee-search" class="form-control w-25" placeholder="Search here...">
+                        <label class="ms-5 me-2 mt-2">From : </label>
+                        <input type="date" id="date-from" class="form-control w-auto">
+                        <label class="ms-2 me-2 mt-2">To : </label>
+                        <input type="date" id="date-to" class="form-control w-auto">
+                        <button class="btn ms-3 me-2 btn-outline-success" id="apply-filters">Apply</button>
+                        <button class="btn btn-secondary btn-sm" id="reset-filters">Reset</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>Specialization</th>
+                                <th>Start Date</th>
+                                <th>Customers</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-employees"></tbody>
+                    </table>
+                </div>
+                <div id="pagination" class="d-flex justify-content-center align-items-center mt-3">
+                    <button id="prev" class="btn btn-outline-secondary me-2">&lt;</button>
+                    <span id="current-page">1</span>
+                    <button id="next" class="btn btn-outline-secondary ms-2">&gt;</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Employee Modal -->
+    <div class="modal fade" id="editEmployeeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#5B4D67;color:white;">
+                    <h5 class="modal-title">Edit Employee</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-form">
+                        <div class="mb-3">
+                            <label class="form-label">Employee Name</label>
+                            <input type="text" class="form-control" id="edit-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Specialization</label>
+                            <select id="edit-specialization" class="form-select"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Start Date</label>
+                            <input type="date" class="form-control" id="edit-start-date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select id="edit-status" class="form-select" required>
+                                <option>Active</option>
+                                <option>Inactive</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn text-light w-100 fw-bold"
+                            style="background:linear-gradient(#5B4D67,#7e6a90);">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Details Modal -->
+    <div class="modal fade" id="viewDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#5B4D67;color:white;">
+                    <h5 class="modal-title">Customer Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody id="details-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Toast Container -->
+        <div class="toast-container" id="toast-container"></div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// البيانات والمودالات
+const employeesdata = [];
+let specializationList = ['Hair', 'Skin', 'Nails'];
+
+let currentPage = 1;
+const rowsPerPage = 20;
+
+const employeeSearchInput = document.getElementById('employee-search');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const currentPageEl = document.getElementById('current-page');
+
+const addEmployeeModal = new bootstrap.Modal(document.getElementById('addEmployeeModal'));
+const editEmployeeModal = new bootstrap.Modal(document.getElementById('editEmployeeModal'));
+const addSpecializationModal = new bootstrap.Modal(document.getElementById('addSpecializationModal'));
+const viewDetailsModal = new bootstrap.Modal(document.getElementById('viewDetailsModal'));
+
+let editIndex = null;
+
+// Render specialization dropdowns
+function renderSpecializationDropdown() {
+    const addSelect = document.getElementById('form-specialization');
+    addSelect.innerHTML = '';
+    specializationList.forEach(spec => {
+        const option = document.createElement('option');
+        option.value = spec;
+        option.textContent = spec;
+        addSelect.appendChild(option);
+    });
+
+    const editSelect = document.getElementById('edit-specialization');
+    editSelect.innerHTML = '';
+    specializationList.forEach(spec => {
+        const option = document.createElement('option');
+        option.value = spec;
+        option.textContent = spec;
+        editSelect.appendChild(option);
+    });
+}
+renderSpecializationDropdown();
+
+// Toast function
+function showToast(message, type = 'success') {
+    const toastContainer = document.getElementById('toast-container');
+    const toastEl = document.createElement('div');
+    toastEl.className = `toast align-items-center text-bg-${type} border-0`;
+    toastEl.role = 'alert';
+    toastEl.style.minWidth = '200px';
+    toastEl.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body">${message}</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    `;
+    toastContainer.appendChild(toastEl);
+
+    const bsToast = new bootstrap.Toast(toastEl, { delay: 3000 });
+    bsToast.show();
+
+    toastEl.addEventListener('hidden.bs.toast', () => {
+        toastEl.remove();
+    });
+}
+
+// Open Add Employee Modal
+document.getElementById('add-new').addEventListener('click', () => {
+    document.getElementById('add-form').reset();
+    document.getElementById('specialization-search').value = '';
+    document.getElementById('add-specialization-btn').style.display = 'none';
+    addEmployeeModal.show();
+});
+
+// Filter specialization as user types
+document.getElementById('specialization-search').addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    const select = document.getElementById('form-specialization');
+    const addBtn = document.getElementById('add-specialization-btn');
+    select.innerHTML = '';
+    const filtered = specializationList.filter(s => s.toLowerCase().includes(query));
+    filtered.forEach(s => {
+        const option = document.createElement('option');
+        option.value = s;
+        option.textContent = s;
+        select.appendChild(option);
+    });
+    addBtn.style.display = filtered.length === 0 && query ? 'inline-block' : 'none';
+});
+
+// Open Add Specialization Modal
+document.getElementById('add-specialization-btn').addEventListener('click', () => {
+    document.getElementById('new-specialization-name').value = document.getElementById('specialization-search').value;
+    addSpecializationModal.show();
+});
+
+// Add specialization
+document.getElementById('add-specialization-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const newSpec = document.getElementById('new-specialization-name').value.trim();
+    if (!newSpec || specializationList.includes(newSpec)) return;
+    specializationList.push(newSpec);
+    renderSpecializationDropdown();
+    addSpecializationModal.hide();
+    showToast('Specialization added successfully', 'success');
+});
+
+// Add Employee
+document.getElementById('add-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const newEmployee = {
+        name: document.getElementById('add-name').value,
+        specialization: document.getElementById('form-specialization').value,
+        date: document.getElementById('add-start-date').value,
+        status: document.getElementById('form-status').value
+    };
+    employeesdata.push(newEmployee);
+    showToast('Employee added successfully', 'success');
+    employeesRenderTable();
+    addEmployeeModal.hide();
+});
+
+// Edit Employee
+document.getElementById('edit-form').addEventListener('submit', e => {
+    e.preventDefault();
+    employeesdata[editIndex].name = document.getElementById('edit-name').value;
+    employeesdata[editIndex].specialization = document.getElementById('edit-specialization').value;
+    employeesdata[editIndex].date = document.getElementById('edit-start-date').value;
+    employeesdata[editIndex].status = document.getElementById('edit-status').value;
+    showToast('Employee updated successfully', 'success');
+    editEmployeeModal.hide();
+    employeesRenderTable();
+});
+
+// Render employees table
+function employeesRenderTable() {
+    const searchTerm = employeeSearchInput.value.toLowerCase();
+    const filtered = employeesdata.filter(c => c.name.toLowerCase().includes(searchTerm));
+    const totalPages = Math.ceil(filtered.length / rowsPerPage);
+    if (currentPage > totalPages) currentPage = totalPages || 1;
+    const start = (currentPage - 1) * rowsPerPage;
+    const pageData = filtered.slice(start, start + rowsPerPage);
+
+    const tableBody = document.getElementById('tbl-employees');
+    tableBody.innerHTML = '';
+
+    pageData.forEach((c, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${c.name}</td>
+            <td>${c.specialization}</td>
+            <td>${c.date}</td>
+            <td><button class="btn btn-sm btn-outline-info view-details">View Details</button></td>
+            <td><span class="status-circle ${c.status.toLowerCase()}"></span> ${c.status}</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary edit-btn">Edit</button>
+                <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+            </td>
+        `;
+        // Edit
+        tr.querySelector('.edit-btn').addEventListener('click', () => {
+            editIndex = start + i;
+            document.getElementById('edit-name').value = c.name;
+            document.getElementById('edit-specialization').value = c.specialization;
+            document.getElementById('edit-start-date').value = c.date;
+            document.getElementById('edit-status').value = c.status;
+            editEmployeeModal.show();
+        });
+        // Delete
+        tr.querySelector('.delete-btn').addEventListener('click', () => {
+            employeesdata.splice(start + i, 1);
+            showToast('Employee deleted', 'danger');
+            employeesRenderTable();
+        });
+        // View Details
+        tr.querySelector('.view-details').addEventListener('click', () => {
+            const tbody = document.getElementById('details-table-body');
+            tbody.innerHTML = '';
+            const customers = [
+                { name: 'Ali', email: 'ali@mail.com', number: '0024561' },
+                { name: 'Sara', email: 'sara@mail.com', number: '000002' },
+                { name: 'John', email: 'john@mail.com', number: '003000' }
+            ];
+            customers.forEach(cust => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${cust.name}</td>
+                    <td>${cust.email}</td>
+                    <td>${cust.number}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            viewDetailsModal.show();
+        });
+        tableBody.appendChild(tr);
+    });
+
+    // Pagination buttons
+    currentPageEl.textContent = currentPage;
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+}
+
+// Pagination events
+prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        employeesRenderTable();
+    }
+});
+nextBtn.addEventListener('click', () => {
+    const searchTerm = employeeSearchInput.value.toLowerCase();
+    const filtered = employeesdata.filter(c => c.name.toLowerCase().includes(searchTerm));
+    const totalPages = Math.ceil(filtered.length / rowsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        employeesRenderTable();
+    }
+});
+
+// Search event
+employeeSearchInput.addEventListener('input', () => {
+    currentPage = 1;
+    employeesRenderTable();
+});
+
+// Initial render
+employeesRenderTable();
+</script>
+
+</body>
+
+</html>

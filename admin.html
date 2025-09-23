@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Beauty Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="d-flex">
+       <!-- Sidebar -->
+    <aside class="sidebar d-flex flex-column p-3">
+      <div class="d-flex justify-content-start"> <img src="images/20250915_112237.png" width="70" height="70" alt="Logo"
+          class="img-fluid mb-2">
+        <h2 class="text-white mt-4 fs-4 ms-3">Beauty Center</h2>
+      </div>
+      <nav class="nav flex-column">
+        <!-- Dashboard -->
+        <a class="nav-link text-white" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
+
+        <!-- Settings Dropdown -->
+        <a class="nav-link text-white d-flex justify-content-between align-items-center active" data-bs-toggle="collapse"
+          href="#settingsMenu" role="button" aria-expanded="false">
+          <span><span class="fs-3">⚙️</span> Settings</span>
+          <span class="fs-6">▼</span>
+        </a>
+        <div class="collapse" id="settingsMenu">
+          <!-- Users -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center active" data-bs-toggle="collapse"
+            href="#usersMenu" role="button" aria-expanded="false">
+            <span>- <span class="fs-3">👨🏻‍💻</span> Users</span><span style="font-size: 11px;">▼</span>
+          </a>
+          <div class="collapse ps-3" id="usersMenu">
+            <a class="nav-link text-white active" href="admin.html">-- 👨🏻‍💻 Admin</a>
+            <a class="nav-link text-white" href="users.html">-- 👨🏻 User</a>
+          </div>
+
+          <!-- Expenses Type -->
+          <a class="nav-link text-white" href="expenses-type.html">- <span class="fs-3">💰</span> Expenses Type</a>
+
+            <!-- Supplier -->
+          <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
+
+          <!-- Employees -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#employeesMenu" role="button" aria-expanded="false">
+            <span>- <span class="fs-3">👩‍💻</span> Employees</span><span style="font-size: 11px;">▼</span>
+          </a>
+          <div class="collapse ps-3" id="employeesMenu">
+            <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
+            <a class="nav-link text-white" href="desgination.html">-- 🖥️ Desgination</a>
+          </div>
+
+          <!-- services -->
+          <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
+        </div>
+
+        <!-- Customers -->
+        <a class="nav-link text-white" href="customers.html"><span class="fs-3">🧑‍💼</span> Customers</a>
+
+        <!-- Billing Dropdown -->
+        <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+          href="#billingMenu" role="button" aria-expanded="false">
+          <span><span class="fs-3">💳</span> Billing</span>
+          <span class="fs-6">▼</span>
+        </a>
+        <div class="collapse" id="billingMenu">
+          <a class="nav-link text-white" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses List</a>
+          <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
+        </div>
+
+        <!-- Calendar -->
+        <a class="nav-link text-white" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
+      </nav>
+      <p class="text-light pt-4 mt-auto">
+        <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
+      </p>
+    </aside>
+
+        <!-- Main content -->
+        <main class="flex-grow-1 p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 style="color: #5B4D67;">Admin</h3>
+                <button class="btn text-light fw-bold" style="background-color: #AE8FD4;" id="add-new">+ Add
+                    User</button>
+            </div>
+
+
+            <!-- Add Users Modal -->
+            <div class="modal fade" id="addModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #5B4D67; color:white;">
+                            <h5 class="modal-title">Add User</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="add-form">
+                                <div class="mb-3">
+                                    <label class="form-label">User Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter user name" id="add-name"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" placeholder="Enter user email"
+                                        id="add-email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Role</label>
+                                    <select class="form-select" aria-label="Default select example" id="add-role">
+                                        <option selected>Open this select role</option>
+                                        <option value="1">Admin</option>
+                                        <option value="2">User</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter password "
+                                        id="add-password">
+                                </div>
+
+                                <button type="submit" class="btn text-light w-100 fw-bold"
+                                    style="background: linear-gradient(#5B4D67,#7e6a90);">Save User</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="card card-custom p-3 mb-4">
+                <h5 class="mb-3" style="color: #5B4D67;">Users List</h5>
+                <!-- Add this above the <table> -->
+                <div class="d-flex justify-content-between mb-3">
+                    <input type="text" id="user-search" class="form-control w-25"
+                        placeholder="Search here...">
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-users">
+                            <!-- Rows added by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="pagination">
+                    <button id="prev">&lt;</button>
+                    <span id="current-page">1</span>
+                    <button id="next">&gt;</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:var(--primary);color:white;">
+                    <h5 class="modal-title">Edit User</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-form">
+                        <div class="mb-3">
+                            <label class="form-label">User Name</label>
+                            <input type="text" class="form-control" id="edit-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="edit-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Role</label>
+                            <select class="form-select" aria-label="Default select example" id="edit-role">
+                                <option selected>Open this select role</option>
+                                <option value="1">Admin</option>
+                                <option value="2">User</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="edit-password">
+                        </div>
+
+                        <button type="submit" class="btn text-light w-100 fw-bold"
+                            style="background:linear-gradient(#5B4D67,#7e6a90) ;">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+
+    <!-- bootstarp5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        const data = [];
+        for (let i = 1; i <= 8; i++) {
+            data.push({ name: 'rama alazhari ' + i, email: 'rama@gmail.com' + i, role: 'admin' });
+        }
+
+        const rowsPerPage = 20;
+        let currentPage = 1;
+        const tableBody = document.getElementById('tbl-users');
+        const searchInput = document.getElementById('user-search');
+        const currentPageEl = document.getElementById('current-page');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+
+        let editIndex = null;
+        const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+        const addModal = new bootstrap.Modal(document.getElementById('addModal'));
+
+        // Toast
+        function showToast(message, type = 'success') {
+            const toastContainer = document.getElementById('toast-container');
+            const toastEl = document.createElement('div');
+            toastEl.className = `toast align-items-center text-bg-${type} border-0 show`;
+            toastEl.role = 'alert';
+            toastEl.style.minWidth = '200px';
+            toastEl.innerHTML = `<div class="d-flex">
+    <div class="toast-body">${message}</div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+  </div>`;
+            toastContainer.appendChild(toastEl);
+            setTimeout(() => toastEl.remove(), 3000);
+        }
+
+        // Render Table
+        function renderTable() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filtered = data.filter(c => c.name.toLowerCase().includes(searchTerm));
+            const totalPages = Math.ceil(filtered.length / rowsPerPage);
+            if (currentPage > totalPages) currentPage = totalPages || 1;
+            const start = (currentPage - 1) * rowsPerPage;
+            const pageData = filtered.slice(start, start + rowsPerPage);
+
+            tableBody.innerHTML = '';
+            pageData.forEach((c, i) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+      <td>${c.name}</td>
+      <td>${c.email}</td>
+      <td>${c.role}</td>
+      <td class="table-actions">
+        <button class="btn btn-sm btn-outline-primary edit-btn">Edit</button>
+        <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+      </td>`;
+                tr.querySelector('.edit-btn').addEventListener('click', () => {
+                    editIndex = start + i;
+                    document.getElementById('edit-name').value = c.name;
+                    document.getElementById('edit-email').value = c.email;
+                    document.getElementById('edit-role').value = c.role;
+                    document.getElementById('edit-password').value = c.password;
+
+
+                    editModal.show();
+                });
+                tr.querySelector('.delete-btn').addEventListener('click', () => {
+                    data.splice(start + i, 1);
+                    showToast('User deleted', 'danger');
+                    renderTable();
+                });
+                tableBody.appendChild(tr);
+            });
+
+            currentPageEl.textContent = currentPage;
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', () => { currentPage = 1; renderTable(); });
+        prevBtn.addEventListener('click', () => { currentPage--; renderTable(); });
+        nextBtn.addEventListener('click', () => { currentPage++; renderTable(); });
+
+        // Add User Modal
+        document.getElementById('add-new').addEventListener('click', () => {
+            document.getElementById('add-form').reset();
+            addModal.show();
+        });
+
+        document.getElementById('add-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const newEmployee = {
+                name: document.getElementById('add-name').value,
+                email: document.getElementById('add-email').value,
+                role: document.getElementById('add-role').value,
+                password: document.getElementById('add-password').value,
+
+            };
+            data.push(newEmployee);
+            renderTable();
+            addModal.hide();
+            showToast('User added successfully', 'success');
+        });
+
+        // Edit User Modal
+        document.getElementById('edit-form').addEventListener('submit', e => {
+            e.preventDefault();
+            data[editIndex].name = document.getElementById('edit-name').value;
+            data[editIndex].email = document.getElementById('edit-email').value;
+            data[editIndex].role = document.getElementById('edit-role').value;
+            data[editIndex].password = document.getElementById('edit-password').value;
+
+
+            editModal.hide();
+            showToast('User updated', 'success');
+            renderTable();
+        });
+
+        // Initial render
+        renderTable();
+    </script>
+
+</body>
+
+</html>

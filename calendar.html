@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Center - Calendar & Management</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/main.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css">
+<style>
+:root {
+    --accent: #CDBDE0;
+    --dark: #53455F;
+}
+
+#calendar {
+    max-width: 100%;
+    margin: auto;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.select2-container .select2-selection--single {
+    height: 38px;
+    padding: 4px;
+}
+</style>
+</head>
+
+<body>
+<div class="d-flex">
+    <!-- Sidebar -->
+     <aside class="sidebar d-flex flex-column p-3">
+      <div class="d-flex justify-content-start">
+ <img src="images/20250915_112237.png" width="70" height="70" alt="Logo" class="img-fluid mb-2">
+      <h2 class="text-white mt-4 fs-4 ms-3">Beauty Center</h2>
+      </div>
+     
+      <nav class="nav flex-column">
+        <!-- Dashboard -->
+        <a class="nav-link text-white " href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
+
+        <!-- Settings Dropdown -->
+        <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+          href="#settingsMenu" role="button" aria-expanded="false">
+          <span><span class="fs-3">⚙️</span> Settings</span>
+          <span class="fs-6">▼</span>
+        </a>
+        <div class="collapse" id="settingsMenu">
+          <!-- Users -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#usersMenu" role="button" aria-expanded="false">
+            <span>- <span class="fs-3">👨🏻‍💻</span> Users</span><span style="font-size: 11px;">▼</span>
+          </a>
+          <div class="collapse ps-3" id="usersMenu">
+            <a class="nav-link text-white" href="admin.html">-- 👨🏻‍💻 Admin</a>
+            <a class="nav-link text-white" href="users.html">-- 👨🏻 User</a>
+          </div>
+
+          <!-- Expenses Type -->
+          <a class="nav-link text-white" href="expenses-type.html">- <span class="fs-3">💰</span> Expenses Type</a>
+
+            <!-- Supplier -->
+          <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
+
+          <!-- Employees -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#employeesMenu" role="button" aria-expanded="false">
+            <span>- <span class="fs-3">👩‍💻</span> Employees</span><span style="font-size: 11px;">▼</span>
+          </a>
+          <div class="collapse ps-3" id="employeesMenu">
+            <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
+            <a class="nav-link text-white" href="desgination.html">-- 🖥️ Desgination</a>
+          </div>
+
+          <!-- services -->
+          <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
+        </div>
+
+        <!-- Customers -->
+        <a class="nav-link text-white" href="customers.html"><span class="fs-3">🧑‍💼</span> Customers</a>
+
+        <!-- Billing Dropdown -->
+        <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+          href="#billingMenu" role="button" aria-expanded="false">
+          <span><span class="fs-3">💳</span> Billing</span>
+          <span class="fs-6">▼</span>
+        </a>
+        <div class="collapse" id="billingMenu">
+          <a class="nav-link text-white" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses List</a>
+          <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
+        </div>
+
+        <!-- Calendar -->
+        <a class="nav-link text-white active" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
+      </nav>
+      <p class="text-light pt-4 mt-auto">
+        <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
+      </p>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-grow-1 p-4">
+
+        <!-- Calendar Section -->
+        <section class="mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 style="color:#5B4D67">Calendar</h3>
+                <button class="btn text-light fw-bold" style="background-color:#AE8FD4;" id="calendar-add-btn">+ Add Appointment</button>
+            </div>
+            <div id="calendar"></div>
+        </section>
+
+        <!-- Customers Section -->
+        <!-- <section class="mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 style="color:#5B4D67">Customers</h3>
+                <button class="btn text-light fw-bold" style="background-color:#AE8FD4;" id="add-customer-btn">+ Add Customer</button>
+            </div>
+            <div class="table-responsive mb-2">
+                <input type="text" id="customer-search" class="form-control w-25 mb-2" placeholder="Search Customers">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th><th>Phone</th><th>Email</th><th>Notes</th><th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-customers"></tbody>
+                </table>
+            </div>
+            <div>
+                <button id="customer-prev">&lt;</button>
+                <span id="customer-current-page">1</span>
+                <button id="customer-next">&gt;</button>
+            </div>
+        </section> -->
+
+        <!-- Employees Section -->
+        <!-- <section class="mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 style="color:#5B4D67">Employees</h3>
+                <button class="btn text-light fw-bold" style="background-color:#AE8FD4;" id="add-employee-btn">+ Add Employee</button>
+            </div>
+            <div class="table-responsive mb-2">
+                <input type="text" id="employee-search" class="form-control w-25 mb-2" placeholder="Search Employees">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th><th>Specialization</th><th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-employees"></tbody>
+                </table>
+            </div>
+            <div>
+                <button id="employee-prev">&lt;</button>
+                <span id="employee-current-page">1</span>
+                <button id="employee-next">&gt;</button>
+            </div>
+        </section> -->
+    </main>
+</div>
+
+<!-- Modals -->
+
+<!-- Appointment Modal -->
+<div class="modal fade" id="appModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(#5B4D67,#7e6a90); color:white;">
+                <h5 class="modal-title">Add Appointment</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="appointment-form">
+                    <div class="mb-3">
+                        <label class="form-label">Customer</label>
+                        <select id="customer-select" class="form-select" required></select>
+                        <button type="button" class="btn btn-link p-0 mt-1" id="appointment-add-customer">+ Add New Customer</button>
+                    </div>
+                    <div id="new-customer-fields" class="border p-3 mb-3 d-none">
+                        <input type="text" class="form-control mb-2" placeholder="Name" id="cust-name">
+                        <input type="text" class="form-control mb-2" placeholder="Phone" id="cust-phone">
+                        <input type="email" class="form-control mb-2" placeholder="Email" id="cust-email">
+                        <textarea class="form-control mb-2" placeholder="Notes" id="cust-notes"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Employee</label>
+                        <select id="employee-select" class="form-select" required></select>
+                        <button type="button" class="btn btn-link p-0 mt-1" id="appointment-add-employee">+ Add New Employee</button>
+                    </div>
+                    <div id="new-employee-fields" class="border p-3 mb-3 d-none">
+                        <input type="text" class="form-control mb-2" placeholder="Name" id="emp-name">
+                        <input type="text" class="form-control mb-2" placeholder="Specialization" id="emp-specialization">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Date & Time</label>
+                        <input type="datetime-local" class="form-control" id="app-datetime" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-control" id="app-notes"></textarea>
+                    </div>
+                    <button type="submit" class="btn text-light w-100 fw-bold" style="background: linear-gradient(#5B4D67,#7e6a90);">Save Appointment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit Customer Modal -->
+<div class="modal fade" id="customerModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#5B4D67;color:white;">
+                <h5 class="modal-title" id="customerModalTitle">Add Customer</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="customer-form">
+                    <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" id="customer-name" required></div>
+                    <div class="mb-3"><label class="form-label">Phone</label><input type="text" class="form-control" id="customer-phone"></div>
+                    <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" id="customer-email"></div>
+                    <div class="mb-3"><label class="form-label">Notes</label><textarea class="form-control" id="customer-notes"></textarea></div>
+                    <button type="submit" class="btn text-light w-100 fw-bold" style="background:linear-gradient(#5B4D67,#7e6a90);">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit Employee Modal -->
+<div class="modal fade" id="employeeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#5B4D67;color:white;">
+                <h5 class="modal-title" id="employeeModalTitle">Add Employee</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="employee-form">
+                    <div class="mb-3"><label class="form-label">Name</label><input type="text" class="form-control" id="employee-name" required></div>
+                    <div class="mb-3"><label class="form-label">Specialization</label><input type="text" class="form-control" id="employee-specialization" required></div>
+                    <button type="submit" class="btn text-light w-100 fw-bold" style="background:linear-gradient(#5B4D67,#7e6a90);">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+///////////////////////
+// TOAST FUNCTION
+function showToast(message, type='success'){
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast align-items-center text-bg-${type} border-0 show`;
+    toast.role='alert';
+    toast.style.minWidth='200px';
+    toast.innerHTML = `<div class="d-flex">
+        <div class="toast-body">${message}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>`;
+    container.appendChild(toast);
+    setTimeout(()=>toast.remove(),3000);
+}
+
+///////////////////////
+// DATA
+const customers = [
+    {id:1, text:'Sara Ali - 09999999 - sara@mail.com'},
+    {id:2, text:'Lina Noor - 09888888 - lina@mail.com'}
+];
+const employees = [
+    {id:1, text:'Mona (Hair)'},
+    {id:2, text:'Rana (Skin)'}
+];
+const events=[];
+
+///////////////////////
+// FULLCALENDAR
+const calendarEl = document.getElementById('calendar');
+const calendar = new FullCalendar.Calendar(calendarEl,{
+    initialView:'dayGridMonth',
+    selectable:true,
+   dateClick:(info)=>{
+    document.getElementById('app-datetime').value = info.dateStr + 'T10:00';
+    new bootstrap.Modal(document.getElementById('appModal')).show(); // ✅
+},
+    events:events
+});
+calendar.render();
+
+///////////////////////
+// SELECT2 INIT
+$('#customer-select').select2({data:customers, dropdownParent:$('#appModal'), tags:true, placeholder:"Select or add customer"});
+$('#employee-select').select2({data:employees, dropdownParent:$('#appModal'), tags:true, placeholder:"Select or add employee"});
+
+///////////////////////
+// Appointment Modal
+document.getElementById('appointment-add-customer').addEventListener('click', ()=>{document.getElementById('new-customer-fields').classList.toggle('d-none');});
+document.getElementById('appointment-add-employee').addEventListener('click', ()=>{document.getElementById('new-employee-fields').classList.toggle('d-none');});
+
+// Add new customer to Select2
+document.getElementById('cust-name').addEventListener('blur',()=>{
+    const name = document.getElementById('cust-name').value;
+    const phone = document.getElementById('cust-phone').value;
+    const email = document.getElementById('cust-email').value;
+    if(name && phone && email){
+        const newCustomer = {id:customers.length+1, text:`${name} - ${phone} - ${email}`};
+        customers.push(newCustomer);
+        $('#customer-select').append(new Option(newCustomer.text,newCustomer.id,true,true)).trigger('change');
+    }
+});
+
+// Add new employee to Select2
+document.getElementById('emp-name').addEventListener('blur',()=>{
+    const name = document.getElementById('emp-name').value;
+    const spec = document.getElementById('emp-specialization').value;
+    if(name && spec){
+        const newEmp = {id:employees.length+1, text:`${name} (${spec})`};
+        employees.push(newEmp);
+        $('#employee-select').append(new Option(newEmp.text,newEmp.id,true,true)).trigger('change');
+    }
+});
+
+// Handle appointment submit
+document.getElementById('appointment-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    const customer = $('#customer-select').find('option:selected').text();
+    const employee = $('#employee-select').find('option:selected').text();
+    const date = document.getElementById('app-datetime').value;
+    const notes = document.getElementById('app-notes').value;
+    events.push({title:`${customer} / ${employee}`, start:date, extendedProps:{notes}});
+    calendar.addEvent({title:`${customer} / ${employee}`, start:date, extendedProps:{notes}});
+    bootstrap.Modal.getInstance(document.getElementById('appModal')).hide();
+});
+document.getElementById('calendar-add-btn').addEventListener('click',()=>{
+    document.getElementById('appointment-form').reset();
+    $('#customer-select').val(null).trigger('change');
+    $('#employee-select').val(null).trigger('change');
+    new bootstrap.Modal(document.getElementById('appModal')).show(); // ✅
+});
+
+
+///////////////////////
+// CUSTOMERS TABLE
+const customersData = [
+    {name:'Rama Alazhari', phone:'000-0001', email:'rama1@gmail.com', notes:'Notes1'},
+    {name:'Lina Noor', phone:'000-0002', email:'lina@gmail.com', notes:'Notes2'}
+];
+let customerPage=1;
+let customerEditIndex=null;
+const customerTable = document.getElementById('tbl-customers');
+const customerPrev = document.getElementById('customer-prev');
+const customerNext = document.getElementById('customer-next');
+const customerCurrentPage = document.getElementById('customer-current-page');
+const rowsPerPage=20;
+
+function renderCustomerTable(){
+    const searchTerm = document.getElementById('customer-search').value.toLowerCase();
+    const filtered = customersData.filter(c=>c.name.toLowerCase().includes(searchTerm));
+    const totalPages = Math.ceil(filtered.length/rowsPerPage);
+    if(customerPage>totalPages) customerPage=totalPages||1;
+    const start = (customerPage-1)*rowsPerPage;
+    const pageData = filtered.slice(start,start+rowsPerPage);
+    customerTable.innerHTML='';
+    pageData.forEach((c,i)=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td>${c.name}</td><td>${c.phone}</td><td>${c.email}</td><td>${c.notes}</td>
+        <td>
+        <button class="btn btn-sm btn-outline-primary edit-btn">Edit</button>
+        <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+        </td>`;
+        tr.querySelector('.edit-btn').addEventListener('click',()=>{
+            customerEditIndex=start+i;
+            document.getElementById('customer-name').value=c.name;
+            document.getElementById('customer-phone').value=c.phone;
+            document.getElementById('customer-email').value=c.email;
+            document.getElementById('customer-notes').value=c.notes;
+            document.getElementById('customerModalTitle').innerText='Edit Customer';
+new bootstrap.Modal(document.getElementById('customerModal')).show();
+        });
+        tr.querySelector('.delete-btn').addEventListener('click',()=>{
+            customersData.splice(start+i,1);
+            showToast('Customer deleted','danger');
+            renderCustomerTable();
+        });
+        customerTable.appendChild(tr);
+    });
+    customerCurrentPage.innerText=customerPage;
+    customerPrev.disabled = customerPage===1;
+    customerNext.disabled = customerPage===totalPages||totalPages===0;
+}
+
+document.getElementById('add-customer-btn').addEventListener('click', () => {
+    document.getElementById('customer-form').reset();
+    document.getElementById('customerModalTitle').innerText = 'Add Customer';
+new bootstrap.Modal(document.getElementById('customerModal')).show(); // ✅
+});
+
+
+document.getElementById('customer-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    const name = document.getElementById('customer-name').value;
+    const phone = document.getElementById('customer-phone').value;
+    const email = document.getElementById('customer-email').value;
+    const notes = document.getElementById('customer-notes').value;
+    if(document.getElementById('customerModalTitle').innerText==='Add Customer'){
+        customersData.push({name,phone,email,notes});
+        showToast('Customer added successfully','success');
+    } else {
+        customersData[customerEditIndex]={name,phone,email,notes};
+        showToast('Customer updated','success');
+    }
+    renderCustomerTable();
+    bootstrap.Modal.getInstance(document.getElementById('customerModal')).hide();
+});
+
+document.getElementById('customer-search').addEventListener('input',()=>{customerPage=1;renderCustomerTable();});
+customerPrev.addEventListener('click',()=>{customerPage--;renderCustomerTable();});
+customerNext.addEventListener('click',()=>{customerPage++;renderCustomerTable();});
+renderCustomerTable();
+
+///////////////////////
+// EMPLOYEES TABLE
+const employeesData = [
+    {name:'Mona', specialization:'Hair'},
+    {name:'Rana', specialization:'Skin'}
+];
+let employeePage=1;
+let employeeEditIndex=null;
+const employeeTable=document.getElementById('tbl-employees');
+const employeePrevBtn=document.getElementById('employee-prev');
+const employeeNextBtn=document.getElementById('employee-next');
+const employeeCurrentPage=document.getElementById('employee-current-page');
+
+function renderEmployeeTable(){
+    const searchTerm = document.getElementById('employee-search').value.toLowerCase();
+    const filtered = employeesData.filter(c=>c.name.toLowerCase().includes(searchTerm));
+    const totalPages = Math.ceil(filtered.length/rowsPerPage);
+    if(employeePage>totalPages) employeePage=totalPages||1;
+    const start=(employeePage-1)*rowsPerPage;
+    const pageData=filtered.slice(start,start+rowsPerPage);
+    employeeTable.innerHTML='';
+    pageData.forEach((c,i)=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td>${c.name}</td><td>${c.specialization}</td>
+        <td>
+        <button class="btn btn-sm btn-outline-primary edit-btn">Edit</button>
+        <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+        </td>`;
+        tr.querySelector('.edit-btn').addEventListener('click',()=>{
+            employeeEditIndex=start+i;
+            document.getElementById('employee-name').value=c.name;
+            document.getElementById('employee-specialization').value=c.specialization;
+            document.getElementById('employeeModalTitle').innerText='Edit Employee';
+new bootstrap.Modal(document.getElementById('employeeModal')).show();
+        });
+        tr.querySelector('.delete-btn').addEventListener('click',()=>{
+            employeesData.splice(start+i,1);
+            showToast('Employee deleted','danger');
+            renderEmployeeTable();
+        });
+        employeeTable.appendChild(tr);
+    });
+    employeeCurrentPage.innerText=employeePage;
+    employeePrevBtn.disabled = employeePage===1;
+    employeeNextBtn.disabled = employeePage===totalPages||totalPages===0;
+}
+
+document.getElementById('add-employee-btn').addEventListener('click', () => {
+    document.getElementById('employee-form').reset();
+    document.getElementById('employeeModalTitle').innerText = 'Add Employee';
+new bootstrap.Modal(document.getElementById('employeeModal')).show(); // ✅
+});
+
+
+document.getElementById('employee-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=document.getElementById('employee-name').value;
+    const spec=document.getElementById('employee-specialization').value;
+    if(document.getElementById('employeeModalTitle').innerText==='Add Employee'){
+        employeesData.push({name,specialization:spec});
+        showToast('Employee added successfully','success');
+    } else {
+        employeesData[employeeEditIndex]={name,specialization:spec};
+        showToast('Employee updated','success');
+    }
+    renderEmployeeTable();
+    bootstrap.Modal.getInstance(document.getElementById('employeeModal')).hide();
+});
+
+document.getElementById('employee-search').addEventListener('input',()=>{employeePage=1;renderEmployeeTable();});
+employeePrevBtn.addEventListener('click',()=>{employeePage--;renderEmployeeTable();});
+employeeNextBtn.addEventListener('click',()=>{employeePage++;renderEmployeeTable();});
+renderEmployeeTable();
+</script>
+
+</body>
+</html>

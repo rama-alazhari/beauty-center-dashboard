@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Companies - Beauty Center</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="d-flex">
+  
+    <!-- Main content -->
+    <main class="flex-grow-1 p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 style="color:#5B4D67;">Companies / Sites</h3>
+        <button class="btn text-light fw-bold" style="background-color:#AE8FD4;" id="add-new">+ Add Company</button>
+      </div>
+
+      <!-- Companies Table -->
+      <div class="card card-custom p-3 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0" style="color:#5B4D67;">Companies List</h5>
+          <span class="badge bg-secondary" id="total-count">Total: 0</span>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <input type="text" id="company-search" class="form-control w-25" placeholder="Search here...">
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>Logo</th>
+                <th>Company Name</th>
+                <th>Tax Number</th>
+                <th>Address</th>
+                <th>Admin Username</th>
+                <th>Admin Email</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Message</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tbl-companies"></tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center align-items-center mt-3 gap-2">
+          <button id="prev" style="background: none; border: none;">&lt;</button>
+          <span id="current-page">1</span>
+          <button id="next" style="background: none; border: none;">&gt;</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Modal -->
+  <div class="modal fade" id="addModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:var(--primary);color:white;">
+          <h5 class="modal-title">Add Company</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="add-form">
+            <div class="mb-3">
+              <label class="form-label">Company Name</label>
+              <input type="text" class="form-control" id="add-name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Tax Number</label>
+              <input type="text" class="form-control" id="add-tax">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <input type="text" class="form-control" id="add-address">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Logo</label>
+              <input type="file" class="form-control" id="add-logo" accept="image/*">
+            </div>
+            <hr>
+            <h6>Admin Info</h6>
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" class="form-control" id="add-admin-username" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" id="add-admin-email" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" id="add-admin-password" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input type="text" class="form-control" id="add-admin-phone">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="add-admin-active">
+              <label class="form-check-label">Active</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="add-admin-message">
+              <label class="form-check-label">Enable Message</label>
+            </div>
+            <button type="submit" class="btn text-light w-100 fw-bold mt-3"
+              style="background:linear-gradient(#5B4D67,#7e6a90);">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:var(--primary);color:white;">
+          <h5 class="modal-title">Edit Company</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="edit-form">
+            <div class="mb-3">
+              <label class="form-label">Company Name</label>
+              <input type="text" class="form-control" id="edit-name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Tax Number</label>
+              <input type="text" class="form-control" id="edit-tax">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <input type="text" class="form-control" id="edit-address">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Logo</label>
+              <input type="file" class="form-control" id="edit-logo" accept="image/*">
+            </div>
+            <hr>
+            <h6>Admin Info</h6>
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" class="form-control" id="edit-admin-username" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" id="edit-admin-email" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" id="edit-admin-password" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input type="text" class="form-control" id="edit-admin-phone">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="edit-admin-active">
+              <label class="form-check-label">Active</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="edit-admin-message">
+              <label class="form-check-label">Enable Message</label>
+            </div>
+            <button type="submit" class="btn text-light w-100 fw-bold mt-3"
+              style="background:linear-gradient(#5B4D67,#7e6a90);">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toasts -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const data = [];
+    let editIndex = null;
+    const addModal = new bootstrap.Modal(document.getElementById('addModal'));
+    const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+
+    // Pagination
+    let currentPage = 1;
+    const rowsPerPage = 20;
+
+    function showToast(message, type = 'success') {
+      const toastContainer = document.getElementById('toast-container');
+      const toastEl = document.createElement('div');
+      toastEl.className = `toast align-items-center text-bg-${type} border-0 show`;
+      toastEl.innerHTML = `<div class="d-flex">
+        <div class="toast-body">${message}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>`;
+      toastContainer.appendChild(toastEl);
+      setTimeout(() => toastEl.remove(), 3000);
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tbl-companies');
+      const search = document.getElementById('company-search').value.toLowerCase();
+
+      const filtered = data.filter(c => c.name.toLowerCase().includes(search));
+      const totalPages = Math.ceil(filtered.length / rowsPerPage);
+      if (currentPage > totalPages) currentPage = totalPages || 1;
+
+      const start = (currentPage - 1) * rowsPerPage;
+      const pageData = filtered.slice(start, start + rowsPerPage);
+
+      tbody.innerHTML = '';
+      pageData.forEach((c, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><img src="${c.logo}" alt="logo" style="width:40px;height:40px;object-fit:cover;border-radius:50%;"></td>
+          <td>${c.name}</td>
+          <td>${c.tax}</td>
+          <td>${c.address}</td>
+          <td>${c.admin.username}</td>
+          <td>${c.admin.email}</td>
+          <td>${c.admin.phone || '-'}</td>
+          <td>${c.admin.active ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>'}</td>
+          <td>${c.admin.message ? '✅' : '❌'}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary me-1 edit-btn">Edit</button>
+            <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+          </td>
+        `;
+
+        // Edit
+        tr.querySelector('.edit-btn').addEventListener('click', () => {
+          editIndex = (currentPage - 1) * rowsPerPage + i;
+          document.getElementById('edit-name').value = c.name;
+          document.getElementById('edit-tax').value = c.tax;
+          document.getElementById('edit-address').value = c.address;
+
+          document.getElementById('edit-admin-username').value = c.admin.username;
+          document.getElementById('edit-admin-email').value = c.admin.email;
+          document.getElementById('edit-admin-password').value = c.admin.password;
+          document.getElementById('edit-admin-phone').value = c.admin.phone;
+          document.getElementById('edit-admin-active').checked = c.admin.active;
+          document.getElementById('edit-admin-message').checked = c.admin.message;
+
+          editModal.show();
+        });
+
+        // Delete
+        tr.querySelector('.delete-btn').addEventListener('click', () => {
+          data.splice((currentPage - 1) * rowsPerPage + i, 1);
+          showToast("Company deleted", "danger");
+          renderTable();
+        });
+
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('total-count').textContent = `Total: ${filtered.length}`;
+      document.getElementById('current-page').textContent = currentPage;
+      document.getElementById('prev').disabled = currentPage === 1;
+      document.getElementById('next').disabled = currentPage === totalPages || totalPages === 0;
+    }
+
+    // Add
+    document.getElementById('add-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const logoFile = document.getElementById('add-logo').files[0];
+      const logoURL = logoFile ? URL.createObjectURL(logoFile) : "#";
+
+      const newCompany = {
+        name: document.getElementById('add-name').value,
+        tax: document.getElementById('add-tax').value,
+        address: document.getElementById('add-address').value,
+        logo: logoURL,
+        admin: {
+          username: document.getElementById('add-admin-username').value,
+          email: document.getElementById('add-admin-email').value,
+          password: document.getElementById('add-admin-password').value,
+          phone: document.getElementById('add-admin-phone').value,
+          active: document.getElementById('add-admin-active').checked,
+          message: document.getElementById('add-admin-message').checked
+        }
+      };
+
+      data.push(newCompany);
+      addModal.hide();
+      showToast("Company added successfully");
+      renderTable();
+      e.target.reset();
+    });
+
+    // Edit
+    document.getElementById('edit-form').addEventListener('submit', e => {
+      e.preventDefault();
+      data[editIndex].name = document.getElementById('edit-name').value;
+      data[editIndex].tax = document.getElementById('edit-tax').value;
+      data[editIndex].address = document.getElementById('edit-address').value;
+
+      data[editIndex].admin.username = document.getElementById('edit-admin-username').value;
+      data[editIndex].admin.email = document.getElementById('edit-admin-email').value;
+      data[editIndex].admin.password = document.getElementById('edit-admin-password').value;
+      data[editIndex].admin.phone = document.getElementById('edit-admin-phone').value;
+      data[editIndex].admin.active = document.getElementById('edit-admin-active').checked;
+      data[editIndex].admin.message = document.getElementById('edit-admin-message').checked;
+
+      const logoFile = document.getElementById('edit-logo').files[0];
+      if (logoFile) data[editIndex].logo = URL.createObjectURL(logoFile);
+
+      editModal.hide();
+      showToast("Company updated");
+      renderTable();
+    });
+
+    // Pagination controls
+    document.getElementById('prev').addEventListener('click', () => { currentPage--; renderTable(); });
+    document.getElementById('next').addEventListener('click', () => { currentPage++; renderTable(); });
+
+    document.getElementById('company-search').addEventListener('input', () => { currentPage = 1; renderTable(); });
+    document.getElementById('add-new').addEventListener('click', () => addModal.show());
+
+    renderTable();
+  </script>
+</body>
+
+</html>
