@@ -10,30 +10,43 @@
 
     <style>
         /* Dropdown styling */
-.dropdown-list {
-    max-height: 200px;
-    overflow-y: auto;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-    display: none; /* hidden by default */
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
+        .dropdown-list {
+            max-height: 200px;
+            overflow-y: auto;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            display: none;
+            /* hidden by default */
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
 
-.dropdown-list li {
-    padding: 0.5rem 0.75rem;
-    cursor: pointer;
-}
+        .dropdown-list li {
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+        }
 
-.dropdown-list li:hover {
-    background-color: #f1f1f1;
-}
+        .dropdown-list li:hover {
+            background-color: #f1f1f1;
+        }
 
+        .btn-gradient {
+            background: linear-gradient(45deg, #5B4D67, #7e6a90);
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-gradient:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 
@@ -69,7 +82,7 @@
                     <!-- Masters Dropdown -->
                     <a class="nav-link text-white d-flex justify-content-between align-items-center"
                         data-bs-toggle="collapse" href="#mastersMenu" role="button" aria-expanded="false">
-                        <span><span class="fs-3">💳</span> Masters</span>
+                        <span><span class="fs-3">✨</span> Masters</span>
                         <span class="fs-6">▼</span>
                     </a>
                     <div class="collapse" id="mastersMenu">
@@ -110,8 +123,9 @@
                         <span><span class="fs-3">👨🏻‍💻</span> Setup</span><span class="fs-6">▼</span>
                     </a>
                     <div class="collapse ps-3" id="usersMenu">
-                        <a class="nav-link text-white" href="companies.html">- <span class="fs-3">👨🏻‍💻</span> Site</a>
-                        <a class="nav-link text-white" href="users.html">- <span class="fs-3">👨🏻</span>  User</a>
+                        <a class="nav-link text-white" href="companies.html">- <span class="fs-3">👨🏻‍💻</span>
+                            Site</a>
+                        <a class="nav-link text-white" href="users.html">- <span class="fs-3">👨🏻</span> User</a>
                     </div>
                 </nav>
                 <p class="text-light pt-4 mt-auto">
@@ -172,7 +186,8 @@
         </div>
 
         <!-- Add Customer Modal -->
-        <div class="modal fade" id="customerModal" tabindex="-1">
+        <div class="modal fade" id="customerModal" tabindex="-1"
+            style="z-index: 10000000;background: rgba(0, 0, 0, 0.5);">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="background:#5B4D67;color:white;">
@@ -207,22 +222,24 @@
         </div>
 
         <!-- Add Item Modal -->
-        <div class="modal fade" id="itemModal" tabindex="-1">
+        <div class="modal fade" id="itemModal" tabindex="-1" style="z-index: 999999;background: rgba(0, 0, 0, 0.5);">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="background:#5B4D67;color:white;">
-                        <h5 class="modal-title">Add Item</h5>
+                        <h5 class="modal-title">Add Services</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <form id="item-form">
                         <div class="modal-body">
                             <div class="mb-2">
-                                <label>Item Name</label>
-                                <input type="text" id="item-name" class="form-control" required>
+                                <label>Services Name</label>
+                                <input type="text" id="item-name" placeholder="Enter services name" class="form-control"
+                                    required>
                             </div>
                             <div class="mb-2">
                                 <label>Price</label>
-                                <input type="number" id="item-price" class="form-control" required>
+                                <input type="number" id="item-price" placeholder="Enter price" class="form-control"
+                                    required>
                             </div>
                             <div class="mb-2">
                                 <label>Note</label>
@@ -261,7 +278,7 @@
                                     </ul>
 
                                     <!-- Add button -->
-                                    <button class="btn btn-outline-primary w-100 mt-1 d-none" id="add-customer-btn">+
+                                    <button class="btn btn-gradient w-100 mt-1 d-none" id="add-customer-btn">+
                                         Add Customer</button>
                                 </div>
 
@@ -274,10 +291,11 @@
                             </div>
 
                             <!-- Items Table -->
+                            <!-- Items Table -->
                             <table class="table table-bordered" id="items-table">
                                 <thead>
                                     <tr>
-                                        <th>Item</th>
+                                        <th>Services</th>
                                         <th>Qty</th>
                                         <th>Price</th>
                                         <th>Subtotal</th>
@@ -287,7 +305,8 @@
                                 <tbody></tbody>
                             </table>
                             <button type="button" class="btn btn-outline-secondary btn-sm" id="add-item">+ Add
-                                Item</button>
+                                Services</button>
+
 
                             <!-- Totals -->
                             <div class="text-end mt-3">
@@ -344,55 +363,55 @@
         const printBtn = document.getElementById('print-btn');
 
         // helper: update customer select options
-       const customerDropdown = document.getElementById('customer-dropdown');
+        const customerDropdown = document.getElementById('customer-dropdown');
 
-function updateCustomerDropdown(filteredList) {
-    customerDropdown.innerHTML = '';
-    if (filteredList.length > 0) {
-        filteredList.forEach(c => {
-            const li = document.createElement('li');
-            li.textContent = c;
-            li.addEventListener('click', () => {
-                customerSearch.value = c;
+        function updateCustomerDropdown(filteredList) {
+            customerDropdown.innerHTML = '';
+            if (filteredList.length > 0) {
+                filteredList.forEach(c => {
+                    const li = document.createElement('li');
+                    li.textContent = c;
+                    li.addEventListener('click', () => {
+                        customerSearch.value = c;
+                        customerDropdown.style.display = 'none';
+                        addCustomerBtn.classList.add('d-none');
+                    });
+                    customerDropdown.appendChild(li);
+                });
+                customerDropdown.style.display = 'block';
+            } else {
                 customerDropdown.style.display = 'none';
-                addCustomerBtn.classList.add('d-none');
-            });
-            customerDropdown.appendChild(li);
+            }
+        }
+
+        customerSearch.addEventListener('input', () => {
+            const term = customerSearch.value.trim().toLowerCase();
+            const filtered = customersList.filter(c => c.toLowerCase().includes(term));
+            updateCustomerDropdown(filtered);
+
+            addCustomerBtn.classList.toggle('d-none', filtered.length > 0 || !term);
         });
-        customerDropdown.style.display = 'block';
-    } else {
-        customerDropdown.style.display = 'none';
-    }
-}
 
-customerSearch.addEventListener('input', () => {
-    const term = customerSearch.value.trim().toLowerCase();
-    const filtered = customersList.filter(c => c.toLowerCase().includes(term));
-    updateCustomerDropdown(filtered);
+        addCustomerBtn.addEventListener('click', () => {
+            pendingCustomerAddToSelect = true;
+            customerModal.show();
+        });
 
-    addCustomerBtn.classList.toggle('d-none', filtered.length > 0 || !term);
-});
-
-addCustomerBtn.addEventListener('click', () => {
-    pendingCustomerAddToSelect = true;
-    customerModal.show();
-});
-
-document.getElementById('customer-form').addEventListener('submit', e => {
-    e.preventDefault();
-    const name = document.getElementById('cust-name').value.trim();
-    if (!name) return;
-    customersList.push(name);
-    if (pendingCustomerAddToSelect) {
-        customerSearch.value = name;
-        pendingCustomerAddToSelect = false;
-    }
-    customerModal.hide();
-    e.target.reset();
-    addCustomerBtn.classList.add('d-none');
-    customerDropdown.style.display = 'none';
-    showToast('Customer added!', 'success');
-});
+        document.getElementById('customer-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const name = document.getElementById('cust-name').value.trim();
+            if (!name) return;
+            customersList.push(name);
+            if (pendingCustomerAddToSelect) {
+                customerSearch.value = name;
+                pendingCustomerAddToSelect = false;
+            }
+            customerModal.hide();
+            e.target.reset();
+            addCustomerBtn.classList.add('d-none');
+            customerDropdown.style.display = 'none';
+            showToast('Customer added!', 'success');
+        });
 
 
         // helper: update item selects in all rows
@@ -447,95 +466,99 @@ document.getElementById('customer-form').addEventListener('submit', e => {
         });
 
         // ======= ITEMS (rows) + ITEM ADD =======
-        let pendingItemRow = null; // row that requested "Add item"
+       let pendingItemAdd = false; // هل المستخدم ضاف Service جديد؟
 
-        function addItemRow(itemName = itemsList[0].name, qty = 1, price = null) {
-            const tbody = document.querySelector('#items-table tbody');
-            const tr = document.createElement('tr');
+function addItemRow(itemName = '', qty = 1, price = 0) {
+  const tbody = document.querySelector('#items-table tbody');
+  const tr = document.createElement('tr');
 
-            tr.innerHTML = `
-                <td>
-                  <input type="text" class="form-control item-search" placeholder="Search or add..." value="${itemName}">
-                  <select class="form-select item-name mt-1"></select>
-                  <button type="button" class="btn btn-sm btn-outline-secondary mt-1 add-item-btn" style="display:none;">+ Add</button>
-                </td>
-                <td><input type="number" class="form-control item-qty" value="${qty}" min="1"></td>
-                <td><input type="number" class="form-control item-price" value="${price !== null ? price : (itemsList.find(it => it.name === itemName) || itemsList[0]).price}" min="0"></td>
-                <td class="item-subtotal">0.00</td>
-                <td><button type="button" class="btn btn-sm btn-danger remove-item">X</button></td>
-            `;
+  tr.innerHTML = `
+    <td class="position-relative">
+      <input type="text" class="form-control service-search" placeholder="Type to search or add..." value="${itemName}">
+      <ul class="dropdown-list list-group position-absolute w-100 service-dropdown"></ul>
+      <button type="button" class="btn btn-gradient w-100 mt-1 d-none add-service-btn">+ Add Service</button>
+    </td>
+    <td><input type="number" class="form-control item-qty" value="${qty}" min="1"></td>
+    <td><input type="number" class="form-control item-price" value="${price}" min="0"></td>
+    <td class="item-subtotal">0.00</td>
+    <td><button type="button" class="btn btn-sm btn-danger remove-item">X</button></td>
+  `;
 
-            tbody.appendChild(tr);
+  tbody.appendChild(tr);
 
-            const searchInput = tr.querySelector('.item-search');
-            const selectBox = tr.querySelector('.item-name');
-            const addBtn = tr.querySelector('.add-item-btn');
-            const priceInput = tr.querySelector('.item-price');
-            const qtyInput = tr.querySelector('.item-qty');
+  const searchInput = tr.querySelector('.service-search');
+  const dropdown = tr.querySelector('.service-dropdown');
+  const addBtn = tr.querySelector('.add-service-btn');
+  const priceInput = tr.querySelector('.item-price');
+  const qtyInput = tr.querySelector('.item-qty');
 
-            // populate select
-            updateItemSelects();
-            selectBox.value = itemName;
-            // make sure price matches selected
-            const found = itemsList.find(it => it.name === itemName);
-            if (found) priceInput.value = found.price;
-
-            searchInput.addEventListener('input', () => {
-                const term = searchInput.value.trim().toLowerCase();
-                const filtered = itemsList.filter(it => it.name.toLowerCase().includes(term));
-                selectBox.innerHTML = filtered.map(it => `<option value="${it.name}" data-price="${it.price}">${it.name}</option>`).join('');
-                addBtn.style.display = filtered.length === 0 && term ? 'block' : 'none';
-            });
-
-            addBtn.addEventListener('click', () => {
-                pendingItemRow = tr; // remember which row wants the new item
-                itemModal.show();
-            });
-
-            selectBox.addEventListener('change', e => {
-                const opt = selectBox.options[selectBox.selectedIndex];
-                const p = parseFloat(opt.dataset.price || 0);
-                priceInput.value = p;
-                calcInvoiceTotal();
-            });
-
-            qtyInput.addEventListener('input', calcInvoiceTotal);
-            priceInput.addEventListener('input', calcInvoiceTotal);
-
-            tr.querySelector('.remove-item').addEventListener('click', () => { tr.remove(); calcInvoiceTotal(); });
-
-            calcInvoiceTotal();
-            return tr;
-        }
-
-        document.getElementById('add-item').addEventListener('click', () => addItemRow());
-
-        document.getElementById('item-form').addEventListener('submit', e => {
-            e.preventDefault();
-            const name = document.getElementById('item-name').value.trim();
-            const price = parseFloat(document.getElementById('item-price').value) || 0;
-            if (!name) return;
-            itemsList.push({ name, price });
-            updateItemSelects();
-
-            // if a row requested this add, populate that row with the new item
-            if (pendingItemRow) {
-                const sel = pendingItemRow.querySelector('.item-name');
-                const pInput = pendingItemRow.querySelector('.item-price');
-                const sInput = pendingItemRow.querySelector('.item-search');
-                // append new option and select it
-                sel.innerHTML += `<option value="${name}" data-price="${price}">${name}</option>`;
-                sel.value = name;
-                pInput.value = price;
-                sInput.value = name;
-                pendingItemRow = null;
-                calcInvoiceTotal();
-            }
-
-            itemModal.hide();
-            e.target.reset();
-            showToast('Item added!', 'success');
+  function updateDropdown(filtered) {
+    dropdown.innerHTML = '';
+    if (filtered.length > 0) {
+      filtered.forEach(it => {
+        const li = document.createElement('li');
+        li.textContent = it.name;
+        li.addEventListener('click', () => {
+          searchInput.value = it.name;
+          priceInput.value = it.price;
+          dropdown.style.display = 'none';
+          addBtn.classList.add('d-none');
+          calcInvoiceTotal();
         });
+        dropdown.appendChild(li);
+      });
+      dropdown.style.display = 'block';
+    } else {
+      dropdown.style.display = 'none';
+    }
+  }
+
+  searchInput.addEventListener('input', () => {
+    const term = searchInput.value.trim().toLowerCase();
+    const filtered = itemsList.filter(it => it.name.toLowerCase().includes(term));
+    updateDropdown(filtered);
+    addBtn.classList.toggle('d-none', filtered.length > 0 || !term);
+  });
+
+  addBtn.addEventListener('click', () => {
+    pendingItemAdd = tr; // الصف اللي محتاج إضافة
+    document.getElementById('item-name').value = searchInput.value;
+    itemModal.show();
+  });
+
+  qtyInput.addEventListener('input', calcInvoiceTotal);
+  priceInput.addEventListener('input', calcInvoiceTotal);
+
+  tr.querySelector('.remove-item').addEventListener('click', () => {
+    tr.remove();
+    calcInvoiceTotal();
+  });
+
+  calcInvoiceTotal();
+}
+
+// تعديل Submit تبع Add Item Modal
+document.getElementById('item-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('item-name').value.trim();
+  const price = parseFloat(document.getElementById('item-price').value) || 0;
+  if (!name) return;
+
+  itemsList.push({ name, price });
+
+  if (pendingItemAdd) {
+    const searchInput = pendingItemAdd.querySelector('.service-search');
+    const priceInput = pendingItemAdd.querySelector('.item-price');
+    searchInput.value = name;
+    priceInput.value = price;
+    pendingItemAdd = false;
+    calcInvoiceTotal();
+  }
+
+  itemModal.hide();
+  e.target.reset();
+  showToast('Service added successfully!', 'success');
+});
 
         // ======= CALC TOTALS =======
         function calcInvoiceTotal() {
@@ -559,7 +582,7 @@ document.getElementById('customer-form').addEventListener('submit', e => {
         // ======= SAVE INVOICE =======
         document.getElementById('invoice-form').addEventListener('submit', e => {
             e.preventDefault();
-            const customer = document.getElementById('form-customer').value;
+           const customer = document.getElementById('customer-search').value.trim();
             const date = document.getElementById('form-date').value;
             const total = calcInvoiceTotal();
             const editIndexVal = document.getElementById('edit-index').value;

@@ -125,6 +125,27 @@
                 font-size: 12px;
             }
         }
+        /* Dropdowns search */
+.dropdown-list {
+    max-height: 200px;          /* أقصى طول */
+    overflow-y: auto;           /* Scroll إذا العناصر كتيرة */
+    z-index: 1055;              /* فوق المودال */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-top: 2px;            /* مسافة صغيرة تحت input */
+}
+
+.dropdown-list li {
+    cursor: pointer;
+    padding: 8px 12px;
+}
+
+.dropdown-list li:hover {
+    background-color: #f1ebdf;  /* لون فاتح عند hover */
+}
+
     </style>
 </head>
 
@@ -249,7 +270,7 @@
                     <!-- Masters Dropdown -->
                     <a class="nav-link text-white d-flex justify-content-between align-items-center"
                         data-bs-toggle="collapse" href="#mastersMenu" role="button" aria-expanded="false">
-                        <span><span class="fs-3">💳</span> Masters</span>
+                        <span><span class="fs-3">✨</span> Masters</span>
                         <span class="fs-6">▼</span>
                     </a>
                     <div class="collapse" id="mastersMenu">
@@ -290,8 +311,9 @@
                         <span><span class="fs-3">👨🏻‍💻</span> Setup</span><span class="fs-6">▼</span>
                     </a>
                     <div class="collapse ps-3" id="usersMenu">
-                        <a class="nav-link text-white" href="companies.html">- <span class="fs-3">👨🏻‍💻</span> Site</a>
-                        <a class="nav-link text-white" href="users.html">- <span class="fs-3">👨🏻</span>  User</a>
+                        <a class="nav-link text-white" href="companies.html">- <span class="fs-3">👨🏻‍💻</span>
+                            Site</a>
+                        <a class="nav-link text-white" href="users.html">- <span class="fs-3">👨🏻</span> User</a>
                     </div>
                 </nav>
                 <!-- Footer fixed at bottom -->
@@ -320,27 +342,36 @@
                             </div>
                             <div class="modal-body">
                                 <form id="appointment-form">
-                                    <div class="mb-3">
+                                    <div class="mb-3 position-relative">
                                         <label class="form-label">Customer</label>
-                                        <select id="customer-select" class="form-select" required></select>
-                                        <button type="button" id="add-new-customer-btn"
-                                            class="btn btn-link p-0 mt-1 d-none">+ Add
-                                            New Customer</button>
+                                        <input type="text" class="form-control" id="customer-search"
+                                            placeholder="Type to search...">
+                                        <ul class="dropdown-list list-group position-absolute w-100"
+                                            id="customer-dropdown"></ul>
+                                        <button class="btn btn-gradient w-100 mt-1 d-none" id="add-customer-btn">+ Add
+                                            Customer</button>
                                     </div>
-                                    <div class="mb-3">
+
+                                    <div class="mb-3 position-relative">
                                         <label class="form-label">Employee</label>
-                                        <select id="employee-select" class="form-select" required></select>
+                                        <input type="text" class="form-control" id="employee-search"
+                                            placeholder="Search employee...">
+                                        <ul class="dropdown-list list-group position-absolute w-100"
+                                            id="employee-dropdown"></ul>
                                     </div>
-                                    <div id="date-time-wrapper" class="mb-3">
-                                        <!-- Dynamic field (datetime-local OR time) -->
-                                    </div>
+
+
+                                    <div id="date-time-wrapper" class="mb-3"></div>
+
                                     <div class="mb-3">
                                         <label class="form-label">Notes</label>
                                         <textarea class="form-control" id="app-notes"></textarea>
                                     </div>
+
                                     <button type="submit" class="btn btn-gradient w-100">Save Appointment</button>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -461,30 +492,71 @@
             $('#customerModal').modal('show');
         });
 
-        // Customer form save
-        $('#customer-form').on('submit', function (e) {
-            e.preventDefault();
-            const name = $('#cust-name').val();
-            const phone = $('#cust-phone').val();
-            const email = $('#cust-email').val();
-            const notes = $('#cust-notes').val();
-            const newCust = { id: customers.length + 1, text: `${name} - ${phone} - ${email}` };
-            customers.push(newCust);
-            const newOption = new Option(newCust.text, newCust.id, true, true);
-            $('#customer-select').append(newOption).trigger('change');
-            $('#customerModal').modal('hide');
-            $('#customer-form')[0].reset();
+
+
+        // Customer search
+        $('#customer-search').on('input', function () {
+            const query = $(this).val().toLowerCase();
+            const filtered = customers.filter(c => c.text.toLowerCase().includes(query));
+            const dropdown = $('#customer-dropdown');
+            dropdown.empty();
+
+            if (filtered.length > 0) {
+                filtered.forEach(c => {
+                    dropdown.append(`<li class="list-group-item list-group-item-action" data-id="${c.id}">${c.text}</li>`);
+                });
+                $('#add-customer-btn').addClass('d-none');
+            } else {
+                $('#add-customer-btn').removeClass('d-none');
+            }
         });
 
-        // Init Select2 (Employee)
-        $('#employee-select').select2({
-            data: employees,
-            dropdownParent: $('#appModal'),
-            theme: "bootstrap4",
-            placeholder: "🔍 Search employee",
-            tags: false,
-            width: "100%"
+        // اختيار customer
+        $(document).on('click', '#customer-dropdown li', function () {
+            $('#customer-search').val($(this).text());
+            $('#customer-dropdown').empty();
         });
+
+        // زر إضافة عميل جديد
+        $('#add-customer-btn').on('click', function () {
+            $('#customerModal').modal('show');
+        });
+
+        // حفظ عميل جديد
+        $('#customer-form').on('submit', function (e) {
+            e.preventDefault();
+            const newCust = {
+                id: customers.length + 1,
+                text: `${$('#cust-name').val()} - ${$('#cust-phone').val()} - ${$('#cust-email').val()}`
+            };
+            customers.push(newCust);
+            $('#customer-search').val(newCust.text);
+            $('#customerModal').modal('hide');
+            this.reset();
+        });
+
+        // Employee search
+        $('#employee-search').on('input', function () {
+            const query = $(this).val().toLowerCase();
+            const filtered = employees.filter(e => e.text.toLowerCase().includes(query));
+            const dropdown = $('#employee-dropdown');
+            dropdown.empty();
+
+            if (filtered.length > 0) {
+                filtered.forEach(e => {
+                    dropdown.append(`<li class="list-group-item list-group-item-action" data-id="${e.id}">${e.text}</li>`);
+                });
+            }
+        });
+
+        $(document).on('click', '#employee-dropdown li', function () {
+            $('#employee-search').val($(this).text());
+            $('#employee-dropdown').empty();
+        });
+
+
+
+
 
         // Handle Save Appointment
         $('#appointment-form').on('submit', function (e) {
