@@ -10,222 +10,232 @@
 </head>
 
 <body>
-    <div class="d-flex">
-        <!-- Sidebar -->
-        <aside class="sidebar d-flex flex-column p-3">
-            <div class="d-flex justify-content-start"> <img src="images/20250915_112237.png" width="70" height="70" alt="Logo"
-          class="img-fluid mb-2">
-        <h2 class="text-white mt-4 fs-4 ms-3">Beauty Center</h2>
-      </div>
-            <nav class="nav flex-column">
-                <!-- Dashboard -->
-                <a class="nav-link text-white" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <!-- Sidebar -->
+            <aside class="col-12 col-md-4 col-lg-4 col-xl-3 sidebar d-flex flex-column p-3">
+                <div class="d-flex justify-content-start"> <img src="images/20250915_112237.png" width="70" height="70"
+                        alt="Logo" class="img-fluid mb-2">
+                    <h2 class="text-white mt-4 fs-4 ms-3">Beauty Center</h2>
+                </div>
+                <nav class="nav flex-column">
+                    <!-- Dashboard -->
+                    <a class="nav-link text-white" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
 
-                <!-- Settings Dropdown -->
-                <a class="nav-link text-white d-flex justify-content-between align-items-center"
-                    data-bs-toggle="collapse" href="#settingsMenu" role="button" aria-expanded="false">
-                    <span><span class="fs-3">⚙️</span> Settings</span>
-                    <span class="fs-6">▼</span>
-                </a>
-                <div class="collapse" id="settingsMenu">
+                    <!-- Calendar -->
+                    <a class="nav-link text-white" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
+
+                    <!-- Billing Dropdown -->
+                    <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse" href="#billingMenu" role="button" aria-expanded="false">
+                        <span><span class="fs-3">💳</span> Billing</span>
+                        <span class="fs-6">▼</span>
+                    </a>
+                    <div class="collapse" id="billingMenu">
+                        <a class="nav-link text-white" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses
+                        </a>
+                        <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
+                    </div>
+
+                    <!-- Masters Dropdown -->
+                    <a class="nav-link text-white d-flex justify-content-between align-items-center active fw-bold"
+                        data-bs-toggle="collapse" href="#mastersMenu" role="button" aria-expanded="false">
+                        <span><span class="fs-3">💳</span> Masters</span>
+                        <span class="fs-6">▼</span>
+                    </a>
+                    <div class="collapse" id="mastersMenu">
+                        <!-- Supplier -->
+                        <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
+                        <!-- Customers -->
+                        <a class="nav-link text-white active" href="customers.html"> - <span class="fs-3">🧑‍💼</span>
+                            Customers</a>
+                        <!-- services -->
+                        <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
+                    </div>
+
+                    <!-- Settings Dropdown -->
+                    <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse" href="#settingsMenu" role="button" aria-expanded="false">
+                        <span><span class="fs-3">⚙️</span> Settings</span>
+                        <span class="fs-6">▼</span>
+                    </a>
+                    <div class="collapse" id="settingsMenu">
+
+                        <!-- Expenses Type -->
+                        <a class="nav-link text-white" href="expenses-type.html">- <span class="fs-3">💰</span> Expenses
+                            Type</a>
+                        <!-- Employees -->
+                        <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                            data-bs-toggle="collapse" href="#employeesMenu" role="button" aria-expanded="false">
+                            <span>- <span class="fs-3">👩‍💻</span> Employees</span><span
+                                style="font-size: 11px;">▼</span>
+                        </a>
+                        <div class="collapse ps-3" id="employeesMenu">
+                            <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
+                            <a class="nav-link text-white" href="desgination.html">-- 🖥️ Desgination</a>
+                        </div>
+                    </div>
                     <!-- Users -->
                     <a class="nav-link text-white d-flex justify-content-between align-items-center"
                         data-bs-toggle="collapse" href="#usersMenu" role="button" aria-expanded="false">
-                        <span>- <span class="fs-3">👨🏻‍💻</span> Users</span><span style="font-size: 11px;">▼</span>
+                        <span><span class="fs-3">👨🏻‍💻</span> Setup</span><span class="fs-6">▼</span>
                     </a>
                     <div class="collapse ps-3" id="usersMenu">
-                        <a class="nav-link text-white" href="admin.html">-- 👨🏻‍💻 Admin</a>
-                        <a class="nav-link text-white" href="users.html">-- 👨🏻 User</a>
+                        <a class="nav-link text-white" href="companies.html">- <span class="fs-3">👨🏻‍💻</span> Site</a>
+                        <a class="nav-link text-white" href="users.html">- <span class="fs-3">👨🏻</span>  User</a>
                     </div>
+                  
+                </nav>
+                <p class="text-light pt-4 mt-auto">
+                    <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
+                </p>
+            </aside>
 
-                    <!-- Expenses Type -->
-                    <a class="nav-link text-white" href="expenses-type.html">- <span class="fs-3">💰</span> Expenses
-                        Type</a>
-
-                          <!-- Supplier -->
-          <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
-
-                    <!-- Employees -->
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center"
-                        data-bs-toggle="collapse" href="#employeesMenu" role="button" aria-expanded="false">
-                        <span>- <span class="fs-3">👩‍💻</span> Employees</span><span style="font-size: 11px;">▼</span>
-                    </a>
-                    <div class="collapse ps-3" id="employeesMenu">
-                        <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
-                        <a class="nav-link text-white" href="desgination.html">-- 🖥️ Desgination</a>
-                    </div>
-
-                    <!-- services -->
-                    <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
+            <!-- Main content -->
+            <main class="col-12 col-md-8 col-lg-8 col-xl-9 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 style="color: #5B4D67;">🧑‍💼 Customers</h3>
+                    <button class="btn text-light fw-bold" style="background-color: #AE8FD4;" id="add-new">+ Add
+                        Customer</button>
                 </div>
 
-                <!-- Customers -->
-                <a class="nav-link text-white active" href="customers.html"><span class="fs-3">🧑‍💼</span>
-                    Customers</a>
 
-                <!-- Billing Dropdown -->
-                <a class="nav-link text-white d-flex justify-content-between align-items-center"
-                    data-bs-toggle="collapse" href="#billingMenu" role="button" aria-expanded="false">
-                    <span><span class="fs-3">💳</span> Billing</span>
-                    <span class="fs-6">▼</span>
-                </a>
-                <div class="collapse" id="billingMenu">
-                    <a class="nav-link text-white" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses
-                        List</a>
-                    <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
-                </div>
-
-                <!-- Calendar -->
-                <a class="nav-link text-white" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
-            </nav>
-            <p class="text-light pt-4 mt-auto">
-                <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
-            </p>
-        </aside>
-
-        <!-- Main content -->
-        <main class="flex-grow-1 p-4">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 style="color: #5B4D67;">Customers</h3>
-                <button class="btn text-light fw-bold" style="background-color: #AE8FD4;" id="add-new">+ Add
-                    Customer</button>
-            </div>
-
-
-            <!-- Add Customer Modal -->
-            <div class="modal fade" id="addCustomerModal" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color: #5B4D67; color:white;">
-                            <h5 class="modal-title">Add Customer</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="add-form">
-                                <div class="mb-3">
-                                    <label class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter full name" id="add-name"
-                                        required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Phone</label>
-                                    <input type="text" class="form-control" placeholder="000 0000 " id="add-phone">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" placeholder="example@gmail.com"
-                                        id="add-email">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Notes</label>
-                                    <textarea class="form-control" id="add-notes"></textarea>
-                                </div>
-                                <button type="submit" class="btn text-light w-100 fw-bold"
-                                    style="background: linear-gradient(#5B4D67,#7e6a90);">Save Customer</button>
-                            </form>
+                <!-- Add Customer Modal -->
+                <div class="modal fade" id="addCustomerModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #5B4D67; color:white;">
+                                <h5 class="modal-title">Add Customer</h5>
+                                <button type="button" class="btn-close btn-close-white"
+                                    data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="add-form">
+                                    <div class="mb-3">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" placeholder="Enter full name"
+                                            id="add-name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Phone</label>
+                                        <input type="text" class="form-control" placeholder="000 0000 " id="add-phone">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" placeholder="example@gmail.com"
+                                            id="add-email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Notes</label>
+                                        <textarea class="form-control" id="add-notes"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn text-light w-100 fw-bold"
+                                        style="background: linear-gradient(#5B4D67,#7e6a90);">Save Customer</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Customers Table -->
-            <div class="card card-custom p-3 mb-4">
-                <h5 class="mb-3" style="color: #5B4D67;">Customer List</h5>
-                <!-- Add this above the <table> -->
-                <div class="d-flex justify-content-between mb-3">
-                    <input type="text" id="customer-search" class="form-control w-25" placeholder="Search here...">
-                </div>
+                <!-- Customers Table -->
+                <div class="card card-custom p-3 mb-4">
+                    <h5 class="mb-3" style="color: #5B4D67;">Customer List</h5>
+                    <!-- Add this above the <table> -->
+                    <div class="d-flex justify-content-between mb-3">
+                        <input type="text" id="customer-search" class="form-control w-25" placeholder="Search here...">
+                    </div>
 
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Notes</th>
-                                <th>History</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl-customers">
-                            <!-- Rows added by JS -->
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Notes</th>
+                                    <th>History</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl-customers">
+                                <!-- Rows added by JS -->
+                            </tbody>
+                        </table>
+                    </div>
 
-                <div id="pagination">
-                    <button id="prev">&lt;</button>
-                    <span id="current-page">1</span>
-                    <button id="next">&gt;</button>
+                    <div id="pagination">
+                        <button id="prev">&lt;</button>
+                        <span id="current-page">1</span>
+                        <button id="next">&gt;</button>
+                    </div>
                 </div>
-            </div>
-        </main>
-    </div>
+        </div>
 
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editCustomerModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color:var(--primary);color:white;">
-                    <h5 class="modal-title">Edit Customer</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="edit-form">
-                        <div class="mb-3">
-                            <label class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="edit-name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="edit-phone">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" id="edit-email">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Notes</label>
-                            <textarea class="form-control" id="edit-notes"></textarea>
-                        </div>
-                        <button type="submit" class="btn text-light w-100 fw-bold"
-                            style="background:linear-gradient(#5B4D67,#7e6a90) ;">Save Changes</button>
-                    </form>
+        <!-- Edit Modal -->
+        <div class="modal fade" id="editCustomerModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:var(--primary);color:white;">
+                        <h5 class="modal-title">Edit Customer</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit-form">
+                            <div class="mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="edit-name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="edit-phone">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" id="edit-email">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Notes</label>
+                                <textarea class="form-control" id="edit-notes"></textarea>
+                            </div>
+                            <button type="submit" class="btn text-light w-100 fw-bold"
+                                style="background:linear-gradient(#5B4D67,#7e6a90) ;">Save Changes</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- View Details Modal -->
-    <div class="modal fade" id="viewDetailsModal" tabindex="-1">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color:#5B4D67;color:white;">
-                    <h5 class="modal-title">Employee Details</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Employee Name</th>
-                                <th>Last Visit Time</th>
-                                <th>Last Amount Paid</th>
-                            </tr>
-                        </thead>
-                        <tbody id="details-table-body"></tbody>
-                    </table>
+        <!-- View Details Modal -->
+        <div class="modal fade" id="viewDetailsModal" tabindex="-1">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#5B4D67;color:white;">
+                        <h5 class="modal-title">Employee Details</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Employee Name</th>
+                                    <th>Last Visit Time</th>
+                                    <th>Last Amount Paid</th>
+                                </tr>
+                            </thead>
+                            <tbody id="details-table-body"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <!-- Toast Container -->
+            <div class="toast-container" id="toast-container"></div>
         </div>
+
         <!-- Toast Container -->
         <div class="toast-container" id="toast-container"></div>
-    </div>
-
-    <!-- Toast Container -->
-    <div class="toast-container" id="toast-container"></div>
-
+        </main>
+    </div><!-- row flex-nowrap -->
+    </div><!--container-fluid  -->
 
     <!-- bootstarp5 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -306,9 +316,9 @@
                     const tbody = document.getElementById('details-table-body');
                     tbody.innerHTML = '';
                     const customers = [
-                        { name: 'rama alazhari', email: '10-05-2025', number: '1000'+' AED' },
-                        { name: 'maya alazhari', email: '11-12-2024', number: '200'+ ' AED' },
-                        { name: 'aya alazhari', email: '12-01-2025', number: '3000'+ ' AED' }
+                        { name: 'rama alazhari', email: '10-05-2025', number: '1000' + ' AED' },
+                        { name: 'maya alazhari', email: '11-12-2024', number: '200' + ' AED' },
+                        { name: 'aya alazhari', email: '12-01-2025', number: '3000' + ' AED' }
                     ];
                     customers.forEach(cust => {
                         const tr = document.createElement('tr');

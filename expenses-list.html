@@ -7,289 +7,463 @@
   <title>Expenses Log - Beauty Center</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .btn-gradient {
+      background: linear-gradient(45deg, #5B4D67, #7e6a90);
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .btn-gradient:hover {
+      opacity: 0.9;
+    }
+
+    #form-supplier li {
+      cursor: pointer;
+      padding: 6px 10px;
+    }
+
+    #form-supplier li:hover {
+      background-color: #5B4D67;
+      color: #fff;
+    }
+
+    /* السهم يدور عند الفتح */
+    #supplier-search.dropdown-toggle::after {
+      transition: transform 0.3s;
+    }
+
+    #supplier-search.show::after {
+      transform: rotate(180deg);
+    }
+
+    #add-supplier-input::after {
+      content: "▼";
+      float: right;
+      margin-right: 10px;
+      transition: transform 0.3s;
+    }
+
+    #add-supplier-input.show::after {
+      transform: rotate(180deg);
+    }
+  </style>
 </head>
 
 <body>
-  <div class="d-flex">
-    <!-- Sidebar -->
-    <aside class="sidebar d-flex flex-column p-3">
-       <div class="d-flex justify-content-start"> <img src="images/20250915_112237.png" width="70" height="70" alt="Logo"
-          class="img-fluid mb-2">
-        <h2 class="text-white mt-4 fs-4 ms-3">Beauty Center</h2>
-      </div>
-      <nav class="nav flex-column">
-        <a class="nav-link text-white" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
-        <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-          href="#settingsMenu" role="button" aria-expanded="false">
-          <span><span class="fs-3">⚙️</span> Settings</span>
-          <span class="fs-6">▼</span>
-        </a>
-        <div class="collapse" id="settingsMenu">
+  <div class="container-fluid">
+    <div class="row flex-nowrap">
+      <!-- Sidebar -->
+      <aside class="col-12 col-md-4 col-lg-4 col-xl-3 sidebar d-flex flex-column p-3">
+        <div class="d-flex justify-content-start"> <img src="images/20250915_112237.png" width="70" height="70"
+            alt="Logo" class="img-fluid mb-2">
+          <h2 class="text-white mt-4 fs-4 ms-3">Beauty Center</h2>
+        </div>
+        <nav class="nav flex-column">
+          <!-- Dashboard -->
+          <a class="nav-link text-white" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
+
+          <!-- Calendar -->
+          <a class="nav-link text-white" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
+
+          <!-- Billing Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center active fw-bold"
+            data-bs-toggle="collapse" href="#billingMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">💳</span> Billing</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="billingMenu">
+            <a class="nav-link text-white active" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses
+            </a>
+            <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
+          </div>
+
+          <!-- Masters Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#mastersMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">💳</span> Masters</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="mastersMenu">
+            <!-- Supplier -->
+            <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
+            <!-- Customers -->
+            <a class="nav-link text-white" href="customers.html"> - <span class="fs-3">🧑‍💼</span> Customers</a>
+            <!-- services -->
+            <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
+          </div>
+
+          <!-- Settings Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#settingsMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">⚙️</span> Settings</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="settingsMenu">
+
+            <!-- Expenses Type -->
+            <a class="nav-link text-white" href="expenses-type.html">- <span class="fs-3">💰</span> Expenses
+              Type</a>
+            <!-- Employees -->
+            <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+              href="#employeesMenu" role="button" aria-expanded="false">
+              <span>- <span class="fs-3">👩‍💻</span> Employees</span><span style="font-size: 11px;">▼</span>
+            </a>
+            <div class="collapse ps-3" id="employeesMenu">
+              <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
+              <a class="nav-link text-white" href="desgination.html">-- 🖥️ Desgination</a>
+            </div>
+          </div>
+          <!-- Users -->
           <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
             href="#usersMenu" role="button" aria-expanded="false">
-            <span>- <span class="fs-3">👨🏻‍💻</span> Users</span><span style="font-size: 11px;">▼</span>
+            <span><span class="fs-3">👨🏻‍💻</span> Setup</span><span class="fs-6">▼</span>
           </a>
           <div class="collapse ps-3" id="usersMenu">
-            <a class="nav-link text-white" href="admin.html">-- 👨🏻‍💻 Admin</a>
-            <a class="nav-link text-white" href="users.html">-- 👨🏻 User</a>
+            <a class="nav-link text-white" href="companies.html">- <span class="fs-3">👨🏻‍💻</span> Site</a>
+            <a class="nav-link text-white" href="users.html">- <span class="fs-3">👨🏻</span> User</a>
           </div>
-          <a class="nav-link text-white" href="expenses-type.html">- <span class="fs-3">💰</span> Expenses Type</a>
-          <a class="nav-link text-white" href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
-          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-            href="#employeesMenu" role="button" aria-expanded="false">
-            <span>- <span class="fs-3">👩‍💻</span> Employees</span><span style="font-size: 11px;">▼</span>
-          </a>
-          <div class="collapse ps-3" id="employeesMenu">
-            <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
-            <a class="nav-link text-white" href="desgination.html">-- 🖥️ Desgination</a>
-          </div>
-          <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
-        </div>
-        <a class="nav-link text-white" href="customers.html"><span class="fs-3">🧑‍💼</span> Customers</a>
-        <a class="nav-link text-white d-flex justify-content-between align-items-center active"
-          data-bs-toggle="collapse" href="#billingMenu" role="button" aria-expanded="false">
-          <span><span class="fs-3">💳</span> Billing</span>
-          <span class="fs-6">▼</span>
-        </a>
-        <div class="collapse" id="billingMenu">
-          <a class="nav-link text-white active" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses
-            List</a>
-          <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
-        </div>
-        <a class="nav-link text-white" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
-      </nav>
-      <p class="text-light pt-4 mt-auto">
-        <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
-      </p>
-    </aside>
+        </nav>
+        <p class="text-light pt-4 mt-auto">
+          <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
+        </p>
+      </aside>
 
-    <!-- Main content -->
-    <main class="flex-grow-1 p-4">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 style="color:#5B4D67;">Expenses List</h3>
-        <div class="d-flex gap-2">
-          <button class="btn btn-outline-success btn-sm" id="export-excel">⬇ Export Excel</button>
-          <button class="btn text-light fw-bold fs-6" style="background-color:#AE8FD4;" id="add-new">+ Add
-            Expense</button>
+      <!-- Main content -->
+      <main class="col-12 col-md-8 col-lg-8 col-xl-9 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 style="color:#5B4D67;">💰 Expenses</h3>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-success btn-sm" id="export-excel">⬇ Export Excel</button>
+            <button class="btn text-light fw-bold fs-6" style="background-color:#AE8FD4;" id="add-new">+ Add
+              Expense</button>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card p-3 mb-4">
+          <h5 class="mb-3" style="color:#5B4D67;">Expenses List</h5>
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+            <input type="text" id="expense-search" class="form-control w-100 flex-grow-1 flex-sm-grow-0"
+              placeholder="Search here...">
+            <label class="mb-0">From : </label>
+            <input type="date" id="date-from" class="form-control w-auto">
+            <label class="mb-0">To : </label>
+            <input type="date" id="date-to" class="form-control w-auto">
+            <button class="btn btn-outline-success" id="apply-filters">Apply</button>
+            <button class="btn btn-secondary" id="reset-filters">Reset</button>
+          </div>
+
+          <!-- Expenses Table -->
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Type</th>
+                  <th>Supplier</th>
+                  <th>Invoice Date</th>
+                  <th>Grand Total</th>
+                  <th>Notes</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbl-expenses"></tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div id="pagination" class="d-flex justify-content-center align-items-center gap-2">
+            <button id="prev" class="btn btn-sm">&lt;</button>
+            <span id="current-page">1</span>
+            <button id="next" class="btn btn-sm">&gt;</button>
+          </div>
+        </div>
+    </div>
+
+    <!-- Add Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#5B4D67;color:white;">
+            <h5 class="modal-title">Add Expense</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="add-form">
+              <div class="mb-3">
+                <label class="form-label">Type</label>
+                <select id="add-type" class="form-select" required>
+                  <option value="Electricity">Electricity</option>
+                  <option value="Internet">Internet</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Supplies">Supplies</option>
+                </select>
+              </div>
+              <!-- Supplier -->
+              <div class="mb-3">
+                <label class="form-label">Supplier</label>
+                <div class="position-relative">
+                  <input type="text" class="form-control" placeholder="Type to search..." id="add-supplier-input">
+                  <ul class="list-group position-absolute w-100 mt-1 d-none" id="add-form-supplier"
+                    style="max-height:150px; overflow-y:auto; z-index:1000;"></ul>
+                  <button class="btn btn-gradient w-100 mt-1 d-none" type="button" id="add-supplier-btn">
+                    + Add New Supplier
+                  </button>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Invoice Date</label>
+                <input type="date" class="form-control" id="add-date">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Grand Total</label>
+                <input type="number" placeholder="Enter grand total" class="form-control" id="add-invoice" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Notes</label>
+                <textarea class="form-control" id="add-notes"></textarea>
+              </div>
+              <button type="submit" class="btn text-light w-100 fw-bold"
+                style="background:linear-gradient(#5B4D67,#7e6a90)">Save</button>
+            </form>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- Filters -->
-      <div class="card p-3 mb-4">
-        <div class="d-flex flex-wrap gap-2 mb-3">
-          <input type="text" id="expense-search" class="form-control w-auto" placeholder="Search here...">
-        </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#5B4D67;color:white;">
+            <h5 class="modal-title">Edit Expense</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="edit-form">
+              <div class="mb-3">
+                <label class="form-label">Type</label>
+                <select id="edit-type" class="form-select" required>
+                  <option value="Electricity">Electricity</option>
+                  <option value="Internet">Internet</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Supplies">Supplies</option>
+                </select>
+              </div>
+              <!-- Supplier -->
+              <div class="mb-3">
+                <label class="form-label">Supplier</label>
+                <div class="position-relative">
+                  <input type="text" class="form-control" placeholder="Type to search..." id="edit-supplier-input">
+                  <ul class="list-group position-absolute w-100 mt-1 d-none" id="edit-form-supplier"
+                    style="max-height:150px; overflow-y:auto; z-index:1000;"></ul>
+                  <button class="btn btn-gradient w-100 mt-1 d-none" type="button" id="edit-add-supplier-btn">
+                    + Add New Supplier
+                  </button>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Invoice Date</label>
+                <input type="date" class="form-control" id="edit-date">
+              </div>
 
-        <!-- Expenses Table -->
-        <div class="table-responsive">
-          <table class="table table-hover table-striped">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Type</th>
-                <th>Supplier</th>
-                <th>Supplier Sales Date</th>
-                <th>Supplier Sales Layer</th>
-                <th>Tax ID</th>
-                <th>Sales Value</th>
-                <th>Notes</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="tbl-expenses"></tbody>
-          </table>
-        </div>
-
-        <!-- Pagination -->
-        <div id="pagination" class="d-flex justify-content-center align-items-center gap-2">
-          <button id="prev" class="btn btn-sm">&lt;</button>
-          <span id="current-page">1</span>
-          <button id="next" class="btn btn-sm">&gt;</button>
+              <div class="mb-3">
+                <label class="form-label">Grand Total</label>
+                <input type="number" class="form-control" id="edit-invoice" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Notes</label>
+                <textarea class="form-control" id="edit-notes"></textarea>
+              </div>
+              <button type="submit" class="btn text-light w-100 fw-bold"
+                style="background:linear-gradient(#5B4D67,#7e6a90)">Save Changes</button>
+            </form>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container"></div>
+
     </main>
-  </div>
+  </div><!-- row flex-nowrap -->
+  </div><!--container-fluid  -->
 
-  <!-- Add Modal -->
-  <div class="modal fade" id="addModal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header" style="background-color:#5B4D67;color:white;">
-          <h5 class="modal-title">Add Expense</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="add-form">
-            <div class="mb-3">
-              <label class="form-label">Type</label>
-              <select id="add-type" class="form-select" required>
-                <option value="Electricity">Electricity</option>
-                <option value="Internet">Internet</option>
-                <option value="Transport">Transport</option>
-                <option value="Supplies">Supplies</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Supplier</label>
-              <input type="text" class="form-control" placeholder="Type to search or add..." id="supplier-search">
-              <div class="d-flex justify-content-between mt-2">
-                <select id="form-supplier" class="form-select flex-grow-1" size="3"></select>
-                <button class="btn btn-outline-secondary ms-2" type="button" id="add-supplier-btn"
-                  style="display:none;">+ Add</button>
-              </div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Sales Date</label>
-              <input type="date" class="form-control" id="add-date">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Sales Layer</label>
-              <input type="text" class="form-control" id="add-layer">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Tax ID</label>
-              <input type="text" class="form-control" id="add-tax">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Sales Value</label>
-              <input type="number" class="form-control" id="add-invoice" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Notes</label>
-              <textarea class="form-control" id="add-notes"></textarea>
-            </div>
-            <button type="submit" class="btn text-light w-100 fw-bold"
-              style="background:linear-gradient(#5B4D67,#7e6a90)">Save</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Edit Modal -->
-  <div class="modal fade" id="editModal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header" style="background-color:#5B4D67;color:white;">
-          <h5 class="modal-title">Edit Expense</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="edit-form">
-            <div class="mb-3">
-              <label class="form-label">Type</label>
-              <select id="edit-type" class="form-select" required>
-                <option value="Electricity">Electricity</option>
-                <option value="Internet">Internet</option>
-                <option value="Transport">Transport</option>
-                <option value="Supplies">Supplies</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Supplier</label>
-              <input type="text" class="form-control" placeholder="Type to search or add..." id="edit-supplier-input">
-              <div class="d-flex justify-content-between mt-2">
-                <select id="edit-supplier-select" class="form-select flex-grow-1" size="3"></select>
-                <button class="btn btn-outline-secondary ms-2" type="button" id="edit-add-supplier-btn"
-                  style="display:none;">+ Add</button>
-              </div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Supplier Sales Date</label>
-              <input type="date" class="form-control" id="edit-date">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Supplier Sales Layer</label>
-              <input type="text" class="form-control" id="edit-layer">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Tax ID</label>
-              <input type="text" class="form-control" id="edit-tax">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Sales Value</label>
-              <input type="number" class="form-control" id="edit-invoice" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Notes</label>
-              <textarea class="form-control" id="edit-notes"></textarea>
-            </div>
-            <button type="submit" class="btn text-light w-100 fw-bold"
-              style="background:linear-gradient(#5B4D67,#7e6a90)">Save Changes</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
   <script>
-    const editModal = new bootstrap.Modal(document.getElementById("editModal"));
+    // =======================
+    // المتغيرات الأساسية
+    // =======================
+    const expensesData = [];
+    let suppliersList = ["Power Co", "ISP Ltd"];
+    let currentPage = 1;
+    const rowsPerPage = 20;
     let editIndex = null;
 
-    const editSupplierInput = document.getElementById("edit-supplier-input");
-    const editSupplierSelect = document.getElementById("edit-supplier-select");
-    const editAddSupplierBtn = document.getElementById("edit-add-supplier-btn");
+    // Modals
+    const addModal = new bootstrap.Modal(document.getElementById("addModal"));
+    const editModal = new bootstrap.Modal(document.getElementById("editModal"));
 
-    // Render Edit Supplier Dropdown
-    function renderEditSupplierDropdown(query = "") {
-      editSupplierSelect.innerHTML = "";
-      const filtered = suppliersList.filter(s => s.toLowerCase().includes(query.toLowerCase()));
-      filtered.forEach(s => {
-        const opt = document.createElement("option");
-        opt.value = s;
-        opt.textContent = s;
-        editSupplierSelect.appendChild(opt);
-      });
-      if (filtered.length === 0) {
-        editAddSupplierBtn.style.display = "block";
-      } else {
-        editAddSupplierBtn.style.display = "none";
-      }
+    // Elements
+    const tableBody = document.getElementById("tbl-expenses");
+
+    const addSupplierInput = document.getElementById("add-supplier-input");
+    const addSupplierList = document.getElementById("add-form-supplier");
+    const addSupplierBtn = document.getElementById("add-supplier-btn");
+
+    const editSupplierInput = document.getElementById("edit-supplier-input");
+    const editSupplierList = document.getElementById("edit-form-supplier");
+    const editSupplierBtn = document.getElementById("edit-add-supplier-btn");
+
+    // =======================
+    // Toast Function
+    // =======================
+    function showToast(message, type = "success") {
+      const toastContainer = document.getElementById("toast-container");
+      const toastEl = document.createElement("div");
+      toastEl.className = `toast align-items-center text-bg-${type} border-0 show`;
+      toastEl.role = "alert";
+      toastEl.style.minWidth = "200px";
+      toastEl.innerHTML = `
+      <div class="d-flex">
+        <div class="toast-body">${message}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>`;
+      toastContainer.appendChild(toastEl);
+      setTimeout(() => toastEl.remove(), 3000);
     }
 
-    editSupplierInput.addEventListener("input", () => renderEditSupplierDropdown(editSupplierInput.value));
+    // =======================
+    // Render Supplier Dropdown
+    // =======================
+    function renderSupplierDropdown(query, inputField, listElement, addBtn) {
+      listElement.innerHTML = "";
+      const filtered = suppliersList.filter(s =>
+        s.toLowerCase().includes(query.toLowerCase())
+      );
 
-    editAddSupplierBtn.addEventListener("click", () => {
-      const newSupplier = editSupplierInput.value.trim();
-      if (newSupplier) {
+      if (filtered.length > 0) {
+        filtered.forEach(s => {
+          const li = document.createElement("li");
+          li.textContent = s;
+          li.classList.add("list-group-item");
+          li.addEventListener("click", () => {
+            inputField.value = s;
+            listElement.classList.add("d-none");
+            addBtn.classList.add("d-none");
+          });
+          listElement.appendChild(li);
+        });
+        listElement.classList.remove("d-none");
+      } else {
+        listElement.classList.add("d-none");
+      }
+
+      // زر الإضافة يظهر فقط إذا المورد غير موجود
+      const exists = suppliersList.some(s => s.toLowerCase() === query.toLowerCase().trim());
+      addBtn.classList.toggle("d-none", !query || exists);
+    }
+
+    // =======================
+    // Add Supplier Events
+    // =======================
+    addSupplierInput.addEventListener("input", () => {
+      renderSupplierDropdown(addSupplierInput.value, addSupplierInput, addSupplierList, addSupplierBtn);
+    });
+
+    addSupplierBtn.addEventListener("click", () => {
+      const newSupplier = addSupplierInput.value.trim();
+      if (newSupplier && !suppliersList.includes(newSupplier)) {
         suppliersList.push(newSupplier);
-        renderEditSupplierDropdown("");
-        editSupplierSelect.value = newSupplier;
-        editAddSupplierBtn.style.display = "none";
+        addSupplierInput.value = newSupplier;
         showToast("Supplier added successfully");
+      }
+      addSupplierList.classList.add("d-none");
+      addSupplierBtn.classList.add("d-none");
+    });
+
+    // =======================
+    // Edit Supplier Events
+    // =======================
+    editSupplierInput.addEventListener("input", () => {
+      renderSupplierDropdown(editSupplierInput.value, editSupplierInput, editSupplierList, editSupplierBtn);
+    });
+
+    editSupplierBtn.addEventListener("click", () => {
+      const newSupplier = editSupplierInput.value.trim();
+      if (newSupplier && !suppliersList.includes(newSupplier)) {
+        suppliersList.push(newSupplier);
+        editSupplierInput.value = newSupplier;
+        showToast("Supplier added successfully");
+      }
+      editSupplierList.classList.add("d-none");
+      editSupplierBtn.classList.add("d-none");
+    });
+
+    // إغلاق القوائم عند الضغط خارجها
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("#add-supplier-input, #add-form-supplier, #add-supplier-btn")) {
+        addSupplierList.classList.add("d-none");
+        addSupplierBtn.classList.add("d-none");
+      }
+      if (!e.target.closest("#edit-supplier-input, #edit-form-supplier, #edit-add-supplier-btn")) {
+        editSupplierList.classList.add("d-none");
+        editSupplierBtn.classList.add("d-none");
       }
     });
 
+    // =======================
     // Open Edit Modal
+    // =======================
     function openEditModal(index) {
       editIndex = index;
-      const e = data[index];
-      document.getElementById("edit-type").value = e.type;
-      editSupplierInput.value = e.supplier;
-      renderEditSupplierDropdown(e.supplier);
-      editSupplierSelect.value = e.supplier;
-      document.getElementById("edit-date").value = e.date || "";
-      document.getElementById("edit-layer").value = e.layer || "";
-      document.getElementById("edit-tax").value = e.tax || "";
-      document.getElementById("edit-invoice").value = e.invoice || "";
-      document.getElementById("edit-notes").value = e.notes || "";
+      const exp = expensesData[index];
+      document.getElementById("edit-type").value = exp.type;
+      editSupplierInput.value = exp.supplier;
+      document.getElementById("edit-date").value = exp.date || "";
+      document.getElementById("edit-invoice").value = exp.invoice || "";
+      document.getElementById("edit-notes").value = exp.notes || "";
       editModal.show();
     }
 
+    // =======================
+    // Submit Add Form
+    // =======================
+    document.getElementById("add-form").addEventListener("submit", e => {
+      e.preventDefault();
+      const newExp = {
+        type: document.getElementById("add-type").value,
+        supplier: addSupplierInput.value.trim(),
+        date: document.getElementById("add-date").value,
+        invoice: +document.getElementById("add-invoice").value,
+        notes: document.getElementById("add-notes").value
+      };
+      expensesData.push(newExp);
+      addModal.hide();
+      showToast("Expense added successfully");
+      renderTable();
+    });
+
+    // =======================
     // Submit Edit Form
+    // =======================
     document.getElementById("edit-form").addEventListener("submit", e => {
       e.preventDefault();
-      data[editIndex] = {
+      expensesData[editIndex] = {
         type: document.getElementById("edit-type").value,
-        supplier: editSupplierSelect.value || editSupplierInput.value,
+        supplier: editSupplierInput.value.trim(),
         date: document.getElementById("edit-date").value,
-        layer: document.getElementById("edit-layer").value,
-        tax: document.getElementById("edit-tax").value,
         invoice: +document.getElementById("edit-invoice").value,
         notes: document.getElementById("edit-notes").value
       };
@@ -297,149 +471,81 @@
       showToast("Expense updated");
       renderTable();
     });
-  </script>
-  <script>
-    const data = [];
-    const suppliersList = ["Power Co", "ISP Ltd"];
-    let currentPage = 1;
-    const rowsPerPage = 20;
 
-    const addModal = new bootstrap.Modal(document.getElementById("addModal"));
-    const tableBody = document.getElementById("tbl-expenses");
-
-    function showToast(message, type = "success") {
-      const toastContainer = document.getElementById("toast-container");
-      const toastEl = document.createElement("div");
-      toastEl.className = `toast align-items-center text-bg-${type} border-0 show`;
-      toastEl.role = "alert"; toastEl.style.minWidth = "200px";
-      toastEl.innerHTML = `<div class="d-flex">
-    <div class="toast-body">${message}</div>
-    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-  </div>`;
-      toastContainer.appendChild(toastEl);
-      setTimeout(() => toastEl.remove(), 3000);
-    }
-
-    // Render Supplier Dropdown
-    const supplierInput = document.getElementById("supplier-search");
-    const supplierSelect = document.getElementById("form-supplier");
-    const addSupplierBtn = document.getElementById("add-supplier-btn");
-
-    function renderSupplierDropdown(query = "") {
-      supplierSelect.innerHTML = "";
-      const filtered = suppliersList.filter(s => s.toLowerCase().includes(query.toLowerCase()));
-      filtered.forEach(s => {
-        const opt = document.createElement("option");
-        opt.textContent = s;
-        opt.value = s;
-        supplierSelect.appendChild(opt);
-      });
-      if (filtered.length === 0) {
-        addSupplierBtn.style.display = "block";
-      } else {
-        addSupplierBtn.style.display = "none";
-      }
-    }
-
-    supplierInput.addEventListener("input", () => renderSupplierDropdown(supplierInput.value));
-
-    addSupplierBtn.addEventListener("click", () => {
-      const newSupplier = supplierInput.value.trim();
-      if (newSupplier) {
-        suppliersList.push(newSupplier);
-        renderSupplierDropdown("");
-        supplierSelect.value = newSupplier;
-        addSupplierBtn.style.display = "none";
-        showToast("Supplier added successfully");
-      }
-    });
-
+    // =======================
     // Render Table
-  function renderTable() {
-  const searchTerm = document.getElementById("expense-search").value.toLowerCase();
-  const filtered = data.filter(e => e.type.toLowerCase().includes(searchTerm));
-  const totalPages = Math.ceil(filtered.length / rowsPerPage);
-  if (currentPage > totalPages) currentPage = totalPages || 1;
-  const start = (currentPage - 1) * rowsPerPage;
-  const pageData = filtered.slice(start, start + rowsPerPage);
+    // =======================
+    function renderTable() {
+      const searchTerm = document.getElementById("expense-search").value.toLowerCase();
+      const filtered = expensesData.filter(e => e.type.toLowerCase().includes(searchTerm));
+      const totalPages = Math.ceil(filtered.length / rowsPerPage);
+      if (currentPage > totalPages) currentPage = totalPages || 1;
+      const start = (currentPage - 1) * rowsPerPage;
+      const pageData = filtered.slice(start, start + rowsPerPage);
 
-  tableBody.innerHTML = "";
-  pageData.forEach((e, i) => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${start + i + 1}</td>
-      <td>${e.type}</td>
-      <td>${e.supplier}</td>
-      <td>${e.date || ""}</td>
-      <td>${e.layer || ""}</td>
-      <td>${e.tax || ""}</td>
-      <td>${e.invoice || ""}</td>
-      <td>${e.notes || ""}</td>
-      <td>
-        <button class="btn btn-sm btn-outline-primary edit-btn">Edit</button>
-        <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
-      </td>
-    `;
+      tableBody.innerHTML = "";
+      pageData.forEach((e, i) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+        <td>${start + i + 1}</td>
+        <td>${e.type}</td>
+        <td>${e.supplier}</td>
+        <td>${e.date || ""}</td>
+        <td>${e.invoice || ""}</td>
+        <td>${e.notes || ""}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary edit-btn">Edit</button>
+          <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+        </td>
+      `;
+        tr.querySelector(".edit-btn").addEventListener("click", () => openEditModal(start + i));
+        tr.querySelector(".delete-btn").addEventListener("click", () => {
+          expensesData.splice(start + i, 1);
+          showToast("Deleted", "danger");
+          renderTable();
+        });
+        tableBody.appendChild(tr);
+      });
 
-    // ربط زر Edit بالوظيفة
-    tr.querySelector(".edit-btn").addEventListener("click", () => openEditModal(start + i));
+      document.getElementById("current-page").textContent = currentPage;
+      document.getElementById("prev").disabled = currentPage === 1;
+      document.getElementById("next").disabled = currentPage === totalPages || totalPages === 0;
+    }
 
-    // زر Delete
-    tr.querySelector(".delete-btn").addEventListener("click", () => {
-      data.splice(start + i, 1);
-      showToast("Deleted", "danger");
-      renderTable();
-    });
-
-    tableBody.appendChild(tr);
-  });
-
-  document.getElementById("current-page").textContent = currentPage;
-  document.getElementById("prev").disabled = currentPage === 1;
-  document.getElementById("next").disabled = currentPage === totalPages || totalPages === 0;
-}
-
-
-    // Pagination
+    // =======================
+    // Pagination & Search
+    // =======================
     document.getElementById("expense-search").addEventListener("input", () => { currentPage = 1; renderTable(); });
     document.getElementById("prev").addEventListener("click", () => { currentPage--; renderTable(); });
     document.getElementById("next").addEventListener("click", () => { currentPage++; renderTable(); });
 
-    // Add New Expense
+    // =======================
+    // Add New Expense Button
+    // =======================
     document.getElementById("add-new").addEventListener("click", () => {
       document.getElementById("add-form").reset();
-      renderSupplierDropdown("");
+      addSupplierInput.value = "";
+      addSupplierList.classList.add("d-none");
+      addSupplierBtn.classList.add("d-none");
       addModal.show();
     });
 
-    // Submit Add Form
-    document.getElementById("add-form").addEventListener("submit", e => {
-      e.preventDefault();
-      const newExp = {
-        type: document.getElementById("add-type").value,
-        supplier: supplierSelect.value || supplierInput.value,
-        date: document.getElementById("add-date").value,
-        layer: document.getElementById("add-layer").value,
-        tax: document.getElementById("add-tax").value,
-        invoice: +document.getElementById("add-invoice").value,
-        notes: document.getElementById("add-notes").value
-      };
-      data.push(newExp);
-      addModal.hide();
-      showToast("Expense added successfully");
-      renderTable();
-    });
-
+    // =======================
     // Export Excel
+    // =======================
     document.getElementById("export-excel").addEventListener("click", () => {
       const wb = XLSX.utils.book_new();
-      const ws = XLSX.utils.json_to_sheet(data);
+      const ws = XLSX.utils.json_to_sheet(expensesData);
       XLSX.utils.book_append_sheet(wb, ws, "Expenses");
       XLSX.writeFile(wb, "expenses.xlsx");
     });
 
+    // Initial render
     renderTable();
   </script>
+
+
+
 </body>
 
 </html>

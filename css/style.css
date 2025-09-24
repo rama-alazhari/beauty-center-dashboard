@@ -10,11 +10,23 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.sidebar {
-    width: 350px;
+/* .sidebar {
+    width: 425px;
     min-height: 100vh;
     background-color: var(--primary);
+} */
+
+.sidebar {
+  background-color: var(--primary);
+  min-height: 100vh;
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    min-height: auto;
+  }
+}
+
 
   .sidebar .nav-link {
       transition: all 0.3s ease;

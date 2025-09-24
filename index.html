@@ -8,142 +8,138 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/all.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-  <div class="d-flex">
-    <!-- Sidebar -->
-    <aside class="sidebar d-flex flex-column p-3">
-      <div class="d-flex justify-content-start"> <img src="images/20250915_112237.png" width="70" height="70" alt="Logo"
-          class="img-fluid mb-2">
-        <h2 class="text-white mt-4 fs-4 ms-3">Beauty Center</h2>
-      </div>
-      <nav class="nav flex-column">
-        <!-- Dashboard -->
-        <a class="nav-link text-white active" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
+  <div class="container-fluid">
+    <div class="row flex-nowrap">
+      <!-- Sidebar -->
+      <aside class="col-12 col-lg-3 sidebar d-flex flex-column p-3">
+        <div class="d-flex align-items-center mb-3">
+          <img src="images/20250915_112237.png" width="70" height="70" alt="Logo" class="img-fluid">
+          <h2 class="text-white ms-3 fs-4 mt-3">Beauty Center</h2>
+        </div>
+        <nav class="nav flex-column">
+          <!-- Dashboard -->
+          <a class="nav-link text-white active fw-bold" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
 
-        <!-- Settings Dropdown -->
-        <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-          href="#settingsMenu" role="button" aria-expanded="false">
-          <span><span class="fs-3">⚙️</span> Settings</span>
-          <span class="fs-6">▼</span>
-        </a>
-        <div class="collapse" id="settingsMenu">
+          <!-- Calendar -->
+          <a class="nav-link text-white" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
+
+          <!-- Billing Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#billingMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">💳</span> Billing</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="billingMenu">
+            <a class="nav-link text-white" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses
+            </a>
+            <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
+          </div>
+
+          <!-- Masters Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#mastersMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">💳</span> Masters</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="mastersMenu">
+            <!-- Supplier -->
+            <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
+            <!-- Customers -->
+            <a class="nav-link text-white" href="customers.html"> - <span class="fs-3">🧑‍💼</span> Customers</a>
+            <!-- services -->
+            <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
+          </div>
+
+          <!-- Settings Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#settingsMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">⚙️</span> Settings</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="settingsMenu">
+
+            <!-- Expenses Type -->
+            <a class="nav-link text-white" href="expenses-type.html">- <span class="fs-3">💰</span> Expenses
+              Type</a>
+            <!-- Employees -->
+            <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+              href="#employeesMenu" role="button" aria-expanded="false">
+              <span>- <span class="fs-3">👩‍💻</span> Employees</span><span style="font-size: 11px;">▼</span>
+            </a>
+            <div class="collapse ps-3" id="employeesMenu">
+              <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
+              <a class="nav-link text-white" href="desgination.html">-- 🖥️ Desgination</a>
+            </div>
+          </div>
           <!-- Users -->
           <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
             href="#usersMenu" role="button" aria-expanded="false">
-            <span>- <span class="fs-3">👨🏻‍💻</span> Users</span><span style="font-size: 11px;">▼</span>
+            <span><span class="fs-3">👨🏻‍💻</span> Setup</span><span class="fs-6">▼</span>
           </a>
           <div class="collapse ps-3" id="usersMenu">
-            <a class="nav-link text-white" href="admin.html">-- 👨🏻‍💻 Admin</a>
-            <a class="nav-link text-white" href="users.html">-- 👨🏻 User</a>
+            <a class="nav-link text-white" href="companies.html">- <span class="fs-3">👨🏻‍💻</span> Site</a>
+            <a class="nav-link text-white" href="users.html">- <span class="fs-3">👨🏻</span> User</a>
           </div>
+        </nav>
+        <p class="text-light pt-4 mt-auto">
+          <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
+        </p>
+      </aside>
 
-          <!-- Expenses Type -->
-          <a class="nav-link text-white" href="expenses-type.html">- <span class="fs-3">💰</span> Expenses
-            Type</a>
-
-              <!-- Supplier -->
-          <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
-
-          <!-- Employees -->
-          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-            href="#employeesMenu" role="button" aria-expanded="false">
-            <span>- <span class="fs-3">👩‍💻</span> Employees</span><span style="font-size: 11px;">▼</span>
-          </a>
-          <div class="collapse ps-3" id="employeesMenu">
-            <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
-            <a class="nav-link text-white" href="desgination.html">-- 🖥️ Desgination</a>
-          </div>
-
-          <!-- services -->
-          <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
+      <!-- Main content -->
+      <main class="col-12 col-lg-9 flex-grow-1 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 style="color: #5B4D67;">🏠 Dashboard Overview</h3>
+          <a href="login.html" class="btn login-btn">Login</a>
         </div>
 
-        <!-- Customers -->
-        <a class="nav-link text-white" href="customers.html"><span class="fs-3">🧑‍💼</span>
-          Customers</a>
-
-        <!-- Billing Dropdown -->
-        <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-          href="#billingMenu" role="button" aria-expanded="false">
-          <span><span class="fs-3">💳</span> Billing</span>
-          <span class="fs-6">▼</span>
-        </a>
-        <div class="collapse" id="billingMenu">
-          <a class="nav-link text-white" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses
-            List</a>
-          <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
-        </div>
-
-        <!-- Calendar -->
-        <a class="nav-link text-white" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
-      </nav>
-      <p class="text-light pt-4 mt-auto">
-        <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
-      </p>
-    </aside>
-
-    <!-- Main content -->
-    <main class="flex-grow-1 p-4">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 style="color: #5B4D67;">Dashboard Overview</h3>
-        <a href="companies.html" class="btn login-btn">Companies</a>
-        <a href="login.html" class="btn login-btn">Login</a>
-      </div>
-
-      <!-- Cards Row -->
-      <div class="row g-3">
-        <div class="col-md-3">
-          <div class="card card-custom p-3">
-            <h6>Total Customers</h6>
-            <h2>120</h2>
+        <!-- Cards Row -->
+        <div class="row g-3">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card card-custom p-3">
+              <h6>Total Customers</h6>
+              <h2>120</h2>
+            </div>
           </div>
-        </div>
 
-        <div class="col-md-3">
-          <div class="card card-custom p-3">
-            <h6>Total Expenses</h6>
-            <h2>$4,520</h2>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card card-custom p-3">
+              <h6>Total Expenses</h6>
+              <h2>$4,520</h2>
+            </div>
           </div>
-        </div>
 
-        <div class="col-md-3">
-          <div class="card card-custom p-3">
-            <h6>Upcoming Appointments</h6>
-            <h2>15</h2>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card card-custom p-3">
+              <h6>Upcoming Appointments</h6>
+              <h2>15</h2>
+            </div>
           </div>
-        </div>
 
-        <!-- Sales Card -->
-        <div class="col-md-3">
-          <div class="card card-custom p-3">
-            <h6>Sales (This Month)</h6>
-            <h2 id="invoice-total">$0</h2>
+          <!-- Sales Card -->
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card card-custom p-3">
+              <h6>Sales (This Month)</h6>
+              <h2 id="invoice-total">$0</h2>
+            </div>
           </div>
-        </div>
 
-        <!-- Companies Card -->
-        <div class="col-md-3">
-          <div class="card card-custom p-3">
-            <h6>Total Companies</h6>
-            <h2>8</h2>
-            <a href="companies.html" class="btn btn-sm mt-2 text-light fw-bold"
-              style="background: linear-gradient(#5B4D67,#7e6a90);">Manage</a>
+
+
+          <!-- sales Chart -->
+          <div class="card card-custom mt-4 p-4">
+            <h5 style="color:#5B4D67;">Sales (This Month)</h5>
+            <canvas id="invoiceChart" height="100"></canvas>
           </div>
-        </div>
-      </div>
-
-      <!-- sales Chart -->
-      <div class="card card-custom mt-4 p-4">
-        <h5 style="color:#5B4D67;">Sales (This Month)</h5>
-        <canvas id="invoiceChart" height="100"></canvas>
-      </div>
-    </main>
-  </div>
+      </main>
+    </div><!--row flex-nowrap  -->
+  </div><!-- container-fluid -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     // احصل على اليوم الحالي وبداية الشهر
     const today = new Date();
