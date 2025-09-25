@@ -229,7 +229,7 @@
                     <h5 class="mb-3" style="color: #5B4D67;">Users List</h5>
                     <!-- Add this above the <table> -->
                     <div class="d-flex justify-content-between mb-3">
-                        <input type="text" id="user-search" class="form-control w-25" placeholder="Search here...">
+                        <input type="text" id="user-search" class="form-control w-100" placeholder="Search here...">
                     </div>
 
                     <div class="table-responsive">
@@ -345,7 +345,7 @@
                 tr.innerHTML = `
       <td>${c.name}</td>
       <td>${c.email}</td>
-      <td class="table-actions">
+      <td class="table-actions d-flex flex-column flex-xl-row gap-1">
         <button class="btn btn-sm btn-outline-primary edit-btn">Edit</button>
         <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
       </td>`;

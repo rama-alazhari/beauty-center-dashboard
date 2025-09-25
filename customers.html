@@ -385,9 +385,9 @@
       <td>${c.email}</td>
       <td>${c.notes}</td>
       <td><button class="btn btn-sm btn-outline-info view-details">View</button></td>
-      <td class="table-actions">
-        <button class="btn btn-sm btn-outline-primary edit-btn">Edit</button>
-        <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+      <td class="table-actions d-flex flex-column flex-xl-row gap-1">
+        <button class="btn btn-sm btn-outline-primary  edit-btn">Edit</button>
+        <button class="btn btn-sm btn-outline-danger  delete-btn">Delete</button>
       </td>`;
                 tr.querySelector('.edit-btn').addEventListener('click', () => {
                     editIndex = start + i;
