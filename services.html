@@ -10,10 +10,101 @@
 </head>
 
 <body>
+       <!-- Mobile Menu Button -->
+  <button class="btn btn-gradient d-lg-none w-100 mb-3" style="background-color: #53455F;" data-bs-toggle="offcanvas"
+    data-bs-target="#mobileSidebar">
+    <div class="d-flex align-items-center justify-content-between">
+      <div>
+        <img src="images/20250915_112237.png" width="40" height="40" alt="Logo" class="img-fluid">
+        <span class="text-white ms-2 fs-6">Beauty Center</span>
+      </div>
+      <div class="text-light fs-2"> ☰</div>
+    </div>
+  </button>
     <div class="container-fluid">
+             <!-- Offcanvas Sidebar (Mobile / Tablet) -->
+    <div class="offcanvas offcanvas-start offcanvas-fullscreen" style="background-color: #53455F;" tabindex="-1"
+      id="mobileSidebar">
+      <div class="offcanvas-header justify-content-end">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body p-0 d-flex flex-column">
+        <nav class="nav flex-column flex-grow-1">
+          <!-- Dashboard -->
+          <a class="nav-link text-white" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
+
+          <!-- Calendar -->
+          <a class="nav-link text-white" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
+
+          <!-- Billing Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#billingMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">💳</span> Billing</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="billingMenu">
+            <a class="nav-link text-white" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses
+            </a>
+            <a class="nav-link text-white active" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
+          </div>
+
+          <!-- Masters Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center active fw-bold" data-bs-toggle="collapse"
+            href="#mastersMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">✨</span> Masters</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="mastersMenu">
+            <!-- Supplier -->
+            <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
+            <!-- Customers -->
+            <a class="nav-link text-white " href="customers.html"> - <span class="fs-3">🧑‍💼</span>
+              Customers</a>
+            <!-- services -->
+            <a class="nav-link text-white active" href="services.html">- <span class="fs-3">📦</span> Services</a>
+          </div>
+
+          <!-- Settings Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#settingsMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">⚙️</span> Settings</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="settingsMenu">
+
+            <!-- Expenses Type -->
+            <a class="nav-link text-white " href="expenses-type.html">- <span class="fs-3">💰</span>
+              Expenses
+              Type</a>
+            <!-- Employees -->
+            <a class="nav-link text-white d-flex justify-content-between align-items-center " data-bs-toggle="collapse"
+              href="#employeesMenu" role="button" aria-expanded="false">
+              <span>- <span class="fs-3">👩‍💻</span> Employees</span><span style="font-size: 11px;">▼</span>
+            </a>
+            <div class="collapse ps-3" id="employeesMenu">
+              <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
+              <a class="nav-link text-white " href="desgination.html">-- 🖥️ Desgination</a>
+            </div>
+          </div>
+          <!-- Users -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#usersMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">👨🏻‍💻</span> Setup</span><span class="fs-6">▼</span>
+          </a>
+          <div class="collapse ps-3" id="usersMenu">
+            <a class="nav-link text-white" href="companies.html">- <span class="fs-3">👨🏻‍💻</span> Site</a>
+            <a class="nav-link text-white" href="users.html">- <span class="fs-3">👨🏻</span> User</a>
+          </div>
+        </nav>
+        <p class="text-light pt-4 mt-auto text-center">
+          <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
+        </p>
+      </div>
+    </div>
+
         <div class="row flex-nowrap">
             <!-- Sidebar -->
-            <aside class="col-12 col-md-4 col-lg-4 col-xl-3 sidebar d-flex flex-column p-3">
+            <aside class="col-lg-4 col-xl-3 d-none d-lg-flex flex-column p-3 sidebar">
                 <div class="d-flex justify-content-start"> <img src="images/20250915_112237.png" width="70" height="70"
                         alt="Logo" class="img-fluid mb-2">
                     <h2 class="text-white mt-4 fs-4 ms-3">Beauty Center</h2>
@@ -92,9 +183,9 @@
             </aside>
 
             <!-- Main content -->
-            <main class="col-12 col-md-8 col-lg-8 col-xl-9 p-4">
+            <main class="col-12 col-lg-8 col-xl-9 p-3">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h3 style="color: #5B4D67;">📦 Services</h3>
+                    <h3 style="color: #5B4D67;">📦Services</h3>
                     <button class="btn text-light fw-bold" style="background-color: #AE8FD4;" id="add-new">+ Add
                         service</button>
                 </div>
@@ -139,7 +230,7 @@
                     <h5 class="mb-3" style="color: #5B4D67;">Services List</h5>
                     <!-- Add this above the <table> -->
                     <div class="d-flex justify-content-between mb-3">
-                        <input type="text" id="item-search" class="form-control w-25" placeholder="Search here...">
+                        <input type="text" id="item-search" class="form-control w-100" placeholder="Search here...">
                     </div>
 
                     <div class="table-responsive">

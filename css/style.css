@@ -43,6 +43,12 @@ body {
 .sidebar .nav-link.active {
     background-color: var(--dark);
 }
+.offcanvas-body .nav-link.active {
+    background-color: var(--dark) !important;
+    color: #fff !important;
+}
+
+
 
 .card-custom {
     border-radius: 16px;

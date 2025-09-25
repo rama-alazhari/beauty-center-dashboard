@@ -125,124 +125,131 @@
                 font-size: 12px;
             }
         }
+
         /* Dropdowns search */
-.dropdown-list {
-    max-height: 200px;          /* أقصى طول */
-    overflow-y: auto;           /* Scroll إذا العناصر كتيرة */
-    z-index: 1055;              /* فوق المودال */
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-top: 2px;            /* مسافة صغيرة تحت input */
-}
+        .dropdown-list {
+            max-height: 200px;
+            /* أقصى طول */
+            overflow-y: auto;
+            /* Scroll إذا العناصر كتيرة */
+            z-index: 1055;
+            /* فوق المودال */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 2px;
+            /* مسافة صغيرة تحت input */
+        }
 
-.dropdown-list li {
-    cursor: pointer;
-    padding: 8px 12px;
-}
+        .dropdown-list li {
+            cursor: pointer;
+            padding: 8px 12px;
+        }
 
-.dropdown-list li:hover {
-    background-color: #f1ebdf;  /* لون فاتح عند hover */
-}
-
+        .dropdown-list li:hover {
+            background-color: #f1ebdf;
+            /* لون فاتح عند hover */
+        }
     </style>
 </head>
 
 <body>
+    <!-- Mobile Menu Button -->
+  <button class="btn btn-gradient d-lg-none w-100 mb-3" style="background-color: #53455F;" data-bs-toggle="offcanvas"
+    data-bs-target="#mobileSidebar">
+    <div class="d-flex align-items-center justify-content-between">
+      <div>
+        <img src="images/20250915_112237.png" width="40" height="40" alt="Logo" class="img-fluid">
+        <span class="text-white ms-2 fs-6">Beauty Center</span>
+      </div>
+      <div class="text-light fs-2"> ☰</div>
+    </div>
+  </button>
     <div class="container-fluid">
-        <!-- Mobile Menu Button -->
-        <button class="btn btn-gradient d-lg-none mb-2 w-100" data-bs-toggle="offcanvas"
-            data-bs-target="#mobileSidebar">
-            ☰ Menu
-        </button>
+       
+          <!-- Offcanvas Sidebar (Mobile / Tablet) -->
+    <div class="offcanvas offcanvas-start offcanvas-fullscreen" style="background-color: #53455F;" tabindex="-1"
+      id="mobileSidebar">
+      <div class="offcanvas-header justify-content-end">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body p-0 d-flex flex-column">
+        <nav class="nav flex-column flex-grow-1">
+          <!-- Dashboard -->
+          <a class="nav-link text-white" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
 
-        <!-- Offcanvas Sidebar for Mobile & Tablet -->
-        <div class="offcanvas offcanvas-start" style="background-color: #53455F;" tabindex="-1" id="mobileSidebar">
-            <div class="offcanvas-header">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="images/20250915_112237.png" width="50" height="50" alt="Logo" class="img-fluid">
-                    <h2 class="text-white ms-3 fs-5">Beauty Center</h2>
-                </div>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+          <!-- Calendar -->
+          <a class="nav-link text-white active fw-bold" href="calendar.html"><span class="fs-3">📅</span> Calendar</a>
+
+          <!-- Billing Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#billingMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">💳</span> Billing</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="billingMenu">
+            <a class="nav-link text-white" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses
+            </a>
+            <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
+          </div>
+
+          <!-- Masters Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#mastersMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">✨</span> Masters</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="mastersMenu">
+            <!-- Supplier -->
+            <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
+            <!-- Customers -->
+            <a class="nav-link text-white" href="customers.html"> - <span class="fs-3">🧑‍💼</span>
+              Customers</a>
+            <!-- services -->
+            <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
+          </div>
+
+          <!-- Settings Dropdown -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#settingsMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">⚙️</span> Settings</span>
+            <span class="fs-6">▼</span>
+          </a>
+          <div class="collapse" id="settingsMenu">
+
+            <!-- Expenses Type -->
+            <a class="nav-link text-white " href="expenses-type.html">- <span class="fs-3">💰</span>
+              Expenses
+              Type</a>
+            <!-- Employees -->
+            <a class="nav-link text-white d-flex justify-content-between align-items-center " data-bs-toggle="collapse"
+              href="#employeesMenu" role="button" aria-expanded="false">
+              <span>- <span class="fs-3">👩‍💻</span> Employees</span><span style="font-size: 11px;">▼</span>
+            </a>
+            <div class="collapse ps-3" id="employeesMenu">
+              <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
+              <a class="nav-link text-white " href="desgination.html">-- 🖥️ Desgination</a>
             </div>
-            <div class="offcanvas-body p-0">
-                <nav class="nav flex-column">
-                    <!-- Dashboard -->
-                    <a class="nav-link text-white" href="index.html"><span class="fs-3">🏠</span> Dashboard</a>
-
-                    <!-- Calendar -->
-                    <a class="nav-link text-white active fw-bold" href="calendar.html"><span class="fs-3">📅</span>
-                        Calendar</a>
-
-                    <!-- Billing Dropdown -->
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center"
-                        data-bs-toggle="collapse" href="#billingMenu" role="button" aria-expanded="false">
-                        <span><span class="fs-3">💳</span> Billing</span>
-                        <span class="fs-6">▼</span>
-                    </a>
-                    <div class="collapse" id="billingMenu">
-                        <a class="nav-link text-white" href="expenses-list.html">- <span class="fs-3">💰</span> Expenses
-                        </a>
-                        <a class="nav-link text-white" href="sales.html">- <span class="fs-3">🧾</span> Sales</a>
-                    </div>
-
-                    <!-- Masters Dropdown -->
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center"
-                        data-bs-toggle="collapse" href="#mastersMenu" role="button" aria-expanded="false">
-                        <span><span class="fs-3">💳</span> Masters</span>
-                        <span class="fs-6">▼</span>
-                    </a>
-                    <div class="collapse" id="mastersMenu">
-                        <!-- Supplier -->
-                        <a class="nav-link text-white " href="supplier.html">- <span class="fs-3">💰</span> Supplier</a>
-                        <!-- Customers -->
-                        <a class="nav-link text-white" href="customers.html"> - <span class="fs-3">🧑‍💼</span>
-                            Customers</a>
-                        <!-- services -->
-                        <a class="nav-link text-white" href="services.html">- <span class="fs-3">📦</span> Services</a>
-                    </div>
-
-                    <!-- Settings Dropdown -->
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center"
-                        data-bs-toggle="collapse" href="#settingsMenu" role="button" aria-expanded="false">
-                        <span><span class="fs-3">⚙️</span> Settings</span>
-                        <span class="fs-6">▼</span>
-                    </a>
-                    <div class="collapse" id="settingsMenu">
-
-                        <!-- Expenses Type -->
-                        <a class="nav-link text-white" href="expenses-type.html">- <span class="fs-3">💰</span> Expenses
-                            Type</a>
-                        <!-- Employees -->
-                        <a class="nav-link text-white d-flex justify-content-between align-items-center"
-                            data-bs-toggle="collapse" href="#employeesMenu" role="button" aria-expanded="false">
-                            <span>- <span class="fs-3">👩‍💻</span> Employees</span><span
-                                style="font-size: 11px;">▼</span>
-                        </a>
-                        <div class="collapse ps-3" id="employeesMenu">
-                            <a class="nav-link text-white" href="employees.html">-- 👩 Employee</a>
-                            <a class="nav-link text-white" href="desgination.html">-- 🖥️ Desgination</a>
-                        </div>
-                    </div>
-                    <!-- Users -->
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center"
-                        data-bs-toggle="collapse" href="#usersMenu" role="button" aria-expanded="false">
-                        <span><span class="fs-3">👨🏻‍💻</span> Setup</span><span class="fs-6">▼</span>
-                    </a>
-                    <div class="collapse ps-3" id="usersMenu">
-                        <a class="nav-link text-white" href="companies.html">-- 👨🏻‍💻 Site</a>
-                        <a class="nav-link text-white" href="users.html">-- 👨🏻 User</a>
-                    </div>
-                </nav>
-                <p class="text-light pt-4 mt-auto">
-                    <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
-                </p>
-            </div>
-        </div>
+          </div>
+          <!-- Users -->
+          <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
+            href="#usersMenu" role="button" aria-expanded="false">
+            <span><span class="fs-3">👨🏻‍💻</span> Setup</span><span class="fs-6">▼</span>
+          </a>
+          <div class="collapse ps-3" id="usersMenu">
+            <a class="nav-link text-white" href="companies.html">- <span class="fs-3">👨🏻‍💻</span> Site</a>
+            <a class="nav-link text-white" href="users.html">- <span class="fs-3">👨🏻</span> User</a>
+          </div>
+        </nav>
+        <p class="text-light pt-4 mt-auto text-center">
+          <span style="color:#CDBDE0;">Powered By:</span> VIA UNiFi Information Technology
+        </p>
+      </div>
+    </div>
         <!-- Sidebar (Desktop & Mobile Offcanvas) -->
         <div class="row flex-nowrap">
-            <aside class="col-md-3 col-lg-3 d-none d-lg-flex sidebar p-3 flex-column" id="desktopSidebar">
+            <aside class="col-lg-4 col-xl-3 d-none d-lg-flex flex-column p-3 sidebar" id="desktopSidebar">
                 <div class="d-flex align-items-center mb-3">
                     <img src="images/20250915_112237.png" width="70" height="70" alt="Logo" class="img-fluid">
                     <h2 class="text-white ms-3 fs-4 mt-3">Beauty Center</h2>
@@ -322,7 +329,7 @@
                 </p>
             </aside>
 
-            <main class="col px-3 py-2">
+            <main class="col-12 col-lg-8 col-xl-9 p-3">
                 <div class="container-fluid py-4">
                     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
                         <h3 style="color:#5B4D67">📅 Beauty Center Calendar</h3>
